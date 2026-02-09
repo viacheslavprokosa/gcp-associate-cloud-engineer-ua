@@ -2,11 +2,13 @@
 
 ## Module Goal
 
-Цей модуль надає фундаментальне розуміння хмарних обчислень, моделей обслуговування (IaaS, PaaS, SaaS) та архітектури Google Cloud Platform. Ви дізнаєтесь про регіони, зони доступності та основні переваги використання хмарних технологій.
+Цей модуль охоплює основи хмарних обчислень, моделі обслуговування (IaaS, PaaS, SaaS)
+та географічну структуру Google Cloud Platform (регіони та зони). Ви дізнаєтесь про регіони, зони доступності та основні переваги використання хмарних технологій.
 
 ## Module Goal (English)
 
-This module provides fundamental understanding of cloud computing, service models (IaaS, PaaS, SaaS), and Google Cloud Platform architecture. You will learn about regions, availability zones, and key benefits of using cloud technologies.
+This module covers cloud computing fundamentals, service models (IaaS, PaaS, SaaS),
+and the geographic structure of Google Cloud Platform (regions and zones). You will learn about regions, availability zones, and key benefits of using cloud technologies.
 
 ## Topics
 
