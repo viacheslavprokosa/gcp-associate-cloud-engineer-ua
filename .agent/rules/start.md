@@ -171,9 +171,9 @@ Format of exam-questions.md:
 - Typical Associate Cloud Engineer exam questions (IN ENGLISH)
 - Multiple choice format (A, B, C, D)
 - After each question:
-  - **Correct Answer:** [Letter] (label in Ukrainian: "Правильна відповідь")
-  - **Explanation:** Why the correct answer is correct (in Ukrainian, label: "Пояснення")
-  - **Why other options are wrong:** (in Ukrainian, label: "Чому інші варіанти неправильні")
+  - **Correct Answer:** [Letter] (use Ukrainian label)
+  - **Explanation:** Why the correct answer is correct (in Ukrainian, use appropriate label)
+  - **Why other options are wrong:** (in Ukrainian, use appropriate label)
 - No invented questions — only realistic ACE-style scenarios
 - Focus on practical scenarios, not just theory
 
