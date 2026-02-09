@@ -29,7 +29,7 @@
 
 Високе співвідношення CPU до memory.
 
-**C2/C2D Series**
+#### C2/C2D Series
 
 - c2-standard-4/8/16/30/60
 - c2d-standard (AMD EPYC)
@@ -42,7 +42,7 @@
 
 Високе співвідношення memory до CPU.
 
-**M1/M2 Series**
+#### M1/M2 Series
 
 - m1-ultramem-40/80/160 (до 3.75 TB RAM)
 - m2-ultramem-208/416 (до 12 TB RAM)
@@ -55,7 +55,7 @@
 
 З GPU для ML та графіки.
 
-**A2 Series**
+#### A2 Series
 
 - a2-highgpu-1g/2g/4g/8g
 - NVIDIA A100 GPUs
@@ -118,8 +118,8 @@ gcloud compute instances create my-custom-vm \
 
 ## Порівняльна таблиця
 
-| Series | Type | vCPU Range | Memory/vCPU | Use Case | Price |
-|--------|------|------------|-------------|----------|-------|
+| Series | Type        | vCPU Range | Memory/vCPU | Use Case         | Price |
+|--------|-------------|------------|-------------|------------------|-------|
 | E2 | General | 0.25-32 | 0.5-8 GB | Cost-optimized | $ |
 | N2 | General | 2-128 | 0.5-8 GB | Balanced | $$ |
 | C2 | Compute | 4-60 | 4 GB | High-performance | $$$ |
@@ -188,7 +188,8 @@ gcloud compute instances create my-vm \
 
 ---
 
-> ⚠️ **Важливо для іспиту**: Розуміння різниці між E2, N2, C2, M2 series та коли використовувати custom machine types критично важливе для cost optimization питань.
+> ⚠️ **Важливо для іспиту**: Розуміння різниці між E2, N2, C2, M2 series та коли використовувати
+> custom machine types критично важливе для cost optimization питань.
 
 ---
 
