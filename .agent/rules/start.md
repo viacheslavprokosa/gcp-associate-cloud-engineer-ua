@@ -140,26 +140,26 @@ Example structure:
 ```markdown
 # [Module Name]
 
-## Мета модуля
-[2-3 sentences about what you'll learn]
+## Module Goal
+[2-3 sentences about what you'll learn - in English]
 
-## Теми
+## Topics
 
 - [Topic 1](topic1.md)
 - [Topic 2](topic2.md)
 
-## Ключові моменти для іспиту
+## Key Exam Takeaways
 
 - ✅ Point 1
 - ✅ Point 2
 
-## Діаграма
+## Diagram
 
 ```mermaid
 [diagram here]
 ```
 
-## 📝 [Практичні питання](exam-questions.md)
+## 📝 [Practice Questions](exam-questions.md)
 
 ```
 
@@ -171,9 +171,9 @@ Format of exam-questions.md:
 - Typical Associate Cloud Engineer exam questions (IN ENGLISH)
 - Multiple choice format (A, B, C, D)
 - After each question:
-  - **Правильна відповідь:** [Letter]
-  - **Explanation:** Why the correct answer is correct (Ukrainian)
-  - **Why other options are wrong:** Why other options are wrong (Ukrainian)
+  - **Correct Answer:** [Letter] (label in Ukrainian: "Правильна відповідь")
+  - **Explanation:** Why the correct answer is correct (in Ukrainian, label: "Пояснення")
+  - **Why other options are wrong:** (in Ukrainian, label: "Чому інші варіанти неправильні")
 - No invented questions — only realistic ACE-style scenarios
 - Focus on practical scenarios, not just theory
 
@@ -191,12 +191,12 @@ D) Cloud Functions
 
 **Правильна відповідь:** B
 
-**Пояснення:** GKE з HPA автоматично масштабує контейнеризовані додатки...
+**Пояснення:** [Explanation in Ukrainian why GKE with HPA is correct...]
 
 **Чому інші варіанти неправильні:**
-- A: Потребує ручного управління
-- C: Підходить, але GKE краще для контейнерів
-- D: Для окремих функцій, не для повних додатків
+- A: [Explanation in Ukrainian]
+- C: [Explanation in Ukrainian]
+- D: [Explanation in Ukrainian]
 ```
 
 ────────────────────────
@@ -232,7 +232,7 @@ Use tables:
 
 **Important notes:**
 Highlight critical information for the exam:
-> ⚠️ **Важливо для іспиту:** [Critical information in Ukrainian]
+> ⚠️ **Важливо для іспиту:** [Critical information - content in Ukrainian]
 
 **Best practices:**
 List recommended actions:
@@ -256,6 +256,6 @@ Format:
 ```markdown
 ## A
 
-**ACL (Access Control List)** / Список контролю доступу
-Механізм для управління доступом до ресурсів. [→ IAM](10-iam-security/README.md)
+**ACL (Access Control List)** / [Ukrainian translation]
+[Brief definition in Ukrainian]. [→ IAM](10-iam-security/README.md)
 ```
