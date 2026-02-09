@@ -141,7 +141,7 @@ Example structure:
 # [Module Name]
 
 ## Module Goal
-[2-3 sentences about what you'll learn - in English]
+[2-3 sentences about what you'll learn - in Ukrainian]
 
 ## Topics
 
