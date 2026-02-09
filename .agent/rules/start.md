@@ -129,10 +129,11 @@ certification exam.
 Each module page MUST contain:
 
 1) **Module goal** (2–3 sentences in Ukrainian)
-2) **List of subtopics** with links to detailed pages
-3) **Key exam takeaways** (bullet points, Ukrainian)
-4) **Mermaid diagram** (where applicable) - architecture, flow, hierarchy
-5) **At the bottom:** mandatory link to `exam-questions.md`
+1) **Module goal** (2–3 sentences in English)
+1) **List of subtopics** with links to detailed pages
+1) **Key exam takeaways** (bullet points, English)
+1) **Mermaid diagram** (where applicable) - architecture, flow, hierarchy
+1) **At the bottom:** mandatory link to `exam-questions.md`
 
 Example structure:
 
@@ -171,8 +172,8 @@ Format of exam-questions.md:
 - Multiple choice format (A, B, C, D)
 - After each question:
   - **Правильна відповідь:** [Letter]
-  - **Пояснення:** Why the correct answer is correct (Ukrainian)
-  - **Чому інші варіанти неправильні:** (Ukrainian)
+  - **Explanation:** Why the correct answer is correct (Ukrainian)
+  - **Why other options are wrong:** Why other options are wrong (Ukrainian)
 - No invented questions — only realistic ACE-style scenarios
 - Focus on practical scenarios, not just theory
 
@@ -230,9 +231,11 @@ Use tables:
 | Cost    | Low      | High     |
 
 **Important notes:**
-> ⚠️ **Важливо для іспиту:** This is critical information
+Highlight critical information for the exam:
+> ⚠️ **Важливо для іспиту:** [Critical information in Ukrainian]
 
 **Best practices:**
+List recommended actions:
 
 - ✅ Do this
 - ❌ Don't do this
