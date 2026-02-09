@@ -1,6 +1,6 @@
 # IDE
-.vscode/
 .idea/
+.vscode/
 *.swp
 *.swo
 *~
@@ -9,6 +9,15 @@
 .DS_Store
 Thumbs.db
 
-# Notes
+# CI/CD
+node_modules/
+*.log
+
+# Temporary files
+/tmp/
 *.tmp
+*.mmd
+*.svg
+
+# Notes
 .notes/
