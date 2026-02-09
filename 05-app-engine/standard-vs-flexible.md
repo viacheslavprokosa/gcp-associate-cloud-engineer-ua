@@ -14,11 +14,11 @@
 - Docker контейнери
 - Більше контролю
 
-| Feature | Standard | Flexible |
-|---------|----------|----------|
-| Startup | Milliseconds | Minutes |
-| Scale to 0 | Yes | No |
-| Pricing | Instance hours | vCPU/memory |
-| SSH | No | Yes |
+| Feature      | Standard         | Flexible     |
+|--------------|------------------|--------------|
+| Startup      | Milliseconds     | Minutes      |
+| Scale to 0   | Yes              | No           |
+| Pricing      | Instance hours   | vCPU/memory  |
+| SSH          | No               | Yes          |
 
 **Повернутися до:** [Модуль 05 - App Engine](README.md)

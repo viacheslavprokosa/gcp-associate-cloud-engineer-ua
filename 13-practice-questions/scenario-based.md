@@ -2,7 +2,8 @@
 
 ## Question 1
 
-Your company needs to migrate a monolithic application to GCP. The application uses MySQL and requires minimal changes. What's the best approach?
+Your company needs to migrate a monolithic application to GCP. The application uses MySQL and requires
+minimal changes. What's the best approach?
 
 A) Rewrite as microservices on GKE  
 B) Lift-and-shift to Compute Engine with Cloud SQL  
@@ -17,7 +18,8 @@ D) Use Cloud Functions
 
 ## Question 2
 
-You need to process 1 million images uploaded daily to Cloud Storage. Processing takes 2 minutes per image. What's the most cost-effective solution?
+You need to process 1 million images uploaded daily to Cloud Storage. Processing takes 2 minutes per image.
+What's the most cost-effective solution?
 
 A) Compute Engine VMs  
 B) Cloud Functions  
@@ -26,6 +28,7 @@ D) GKE cluster
 
 **Правильна відповідь:** C
 
-**Пояснення:** Preemptible VMs з batch processing найбільш cost-effective для великих обсягів processing з tolerance до interruptions.
+**Пояснення:** Preemptible VMs з batch processing найбільш cost-effective для великих обсягів processing
+з tolerance до interruptions.
 
 **Повернутися до:** [Модуль 13 - Practice Questions](README.md)

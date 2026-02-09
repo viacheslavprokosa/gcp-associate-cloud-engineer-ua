@@ -1,7 +1,7 @@
 # Storage Classes
 
-| Class | Use Case | Min Duration | Retrieval Cost |
-|-------|----------|--------------|----------------|
+| Class     | Use Case        | Min Duration | Retrieval Cost |
+|-----------|-----------------|--------------|----------------|
 | Standard | Frequent access | None | None |
 | Nearline | < 1/month | 30 days | Low |
 | Coldline | < 1/quarter | 90 days | Medium |
