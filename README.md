@@ -1,7 +1,7 @@
 # GCP Associate Cloud Engineer - Підготовка до іспиту
 
 Цей репозиторій містить структуровану документацію для підготовки до іспиту
-**Google Cloud Associate Cloud Engineer**.
+**Google Cloud Associate Cloud Engineer** українською мовою.
 
 ---
 
