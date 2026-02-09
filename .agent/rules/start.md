@@ -189,11 +189,11 @@ B) Google Kubernetes Engine with Horizontal Pod Autoscaler
 C) App Engine Standard
 D) Cloud Functions
 
-**Правильна відповідь:** B
+**Correct Answer:** B
 
-**Пояснення:** [Explanation in Ukrainian why GKE with HPA is correct...]
+**Explanation:** [Explanation in Ukrainian why GKE with HPA is correct...]
 
-**Чому інші варіанти неправильні:**
+**Why other options are wrong:**
 - A: [Explanation in Ukrainian]
 - C: [Explanation in Ukrainian]
 - D: [Explanation in Ukrainian]
@@ -232,7 +232,7 @@ Use tables:
 
 **Important notes:**
 Highlight critical information for the exam:
-> ⚠️ **Важливо для іспиту:** [Critical information - content in Ukrainian]
+> ⚠️ **Important for exam:** [Critical information - content in Ukrainian]
 
 **Best practices:**
 List recommended actions:
