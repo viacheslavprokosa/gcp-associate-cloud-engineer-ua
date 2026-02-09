@@ -1,51 +1,74 @@
 # Основи хмарних обчислень
 
-## Що таке хмарні обчислення?
+## Module Goal
 
-Хмарні обчислення (Cloud Computing) - це надання обчислювальних ресурсів (серверів, сховищ, баз даних, мереж, програмного забезпечення) через Інтернет на основі оплати за використання.
+Цей модуль надає фундаментальне розуміння хмарних обчислень, моделей обслуговування (IaaS, PaaS, SaaS) та архітектури Google Cloud Platform. Ви дізнаєтесь про регіони, зони доступності та основні переваги використання хмарних технологій.
 
-## Моделі обслуговування
+## Module Goal (English)
 
-### IaaS (Infrastructure as a Service)
+This module provides fundamental understanding of cloud computing, service models (IaaS, PaaS, SaaS), and Google Cloud Platform architecture. You will learn about regions, availability zones, and key benefits of using cloud technologies.
 
-- Надає віртуалізовану обчислювальну інфраструктуру
-- Приклади в GCP: Compute Engine, Cloud Storage
-- Контроль: Ви керуєте ОС, додатками, даними
+## Topics
 
-### PaaS (Platform as a Service)
+- [Моделі хмарних обчислень](cloud-models.md) - IaaS, PaaS, SaaS
+- [Регіони та зони GCP](gcp-regions-zones.md) - Географія та доступність
 
-- Платформа для розробки та розгортання додатків
-- Приклади в GCP: App Engine, Cloud Functions
-- Контроль: Ви керуєте додатками та даними
+## Key Exam Takeaways
 
-### SaaS (Software as a Service)
+- ✅ Understand the difference between IaaS, PaaS, and SaaS service models
+- ✅ Know which GCP services belong to each service model category
+- ✅ Understand the concept of regions and zones for high availability
+- ✅ Know how to choose the right region based on latency, compliance, and cost
+- ✅ Understand multi-region resources vs regional vs zonal resources
+- ✅ Know the benefits of cloud computing: scalability, elasticity, pay-as-you-go
+- ✅ Understand CAPEX vs OPEX cost model transformation
 
-- Готове програмне забезпечення
-- Приклади: Gmail, Google Workspace
-- Контроль: Ви тільки використовуєте додаток
+## Architecture Diagram
 
-## Моделі розгортання
+```mermaid
+graph TB
+    subgraph "Cloud Service Models"
+        A[SaaS<br/>Software as a Service]
+        B[PaaS<br/>Platform as a Service]
+        C[IaaS<br/>Infrastructure as a Service]
+    end
+    
+    subgraph "User Responsibility"
+        A --> A1[Applications Only]
+        B --> B1[Applications + Data]
+        C --> C1[OS + Applications + Data]
+    end
+    
+    subgraph "GCP Examples"
+        A --> A2[Gmail, Workspace]
+        B --> B2[App Engine, Cloud Functions]
+        C --> C2[Compute Engine, Cloud Storage]
+    end
+    
+    style A fill:#e1f5ff
+    style B fill:#fff4e1
+    style C fill:#ffe1e1
+```
 
-1. **Public Cloud** - ресурси належать провайдеру
-2. **Private Cloud** - ресурси для однієї організації
-3. **Hybrid Cloud** - комбінація публічної та приватної хмари
-4. **Multi-Cloud** - використання кількох хмарних провайдерів
+## GCP Geography
 
-## Переваги хмарних обчислень
+```mermaid
+graph LR
+    A[Organization] --> B[Multi-Region<br/>e.g., EU, US]
+    B --> C1[Region<br/>europe-west1]
+    B --> C2[Region<br/>us-central1]
+    
+    C1 --> D1[Zone<br/>europe-west1-a]
+    C1 --> D2[Zone<br/>europe-west1-b]
+    C1 --> D3[Zone<br/>europe-west1-c]
+    
+    C2 --> E1[Zone<br/>us-central1-a]
+    C2 --> E2[Zone<br/>us-central1-b]
+    
+    style A fill:#4285f4,color:#fff
+    style B fill:#34a853,color:#fff
+    style C1 fill:#fbbc04
+    style C2 fill:#fbbc04
+```
 
-- ✅ Економія коштів (CAPEX → OPEX)
-- ✅ Масштабованість
-- ✅ Гнучкість
-- ✅ Надійність та відмовостійкість
-- ✅ Глобальна доступність
-- ✅ Безпека
-
-## Google Cloud Platform
-
-GCP - одна з трьох найбільших хмарних платформ (разом з AWS та Azure).
-
-### Регіони та зони
-
-- **Регіон** - географічна локація (наприклад, europe-west1)
-- **Зона** - ізольований датацентр в регіоні (наприклад, europe-west1-b)
-- Використання кількох зон забезпечує високу доступність
+## 📝 [Practice Questions](exam-questions.md)
