@@ -1,72 +1,94 @@
-# GCP Associate Cloud Engineer - Теоретичні матеріали
+# GCP Associate Cloud Engineer - Підготовка до іспиту
 
-Цей репозиторій містить теоретичні матеріали для підготовки до іспиту **Google Cloud Associate Cloud Engineer**.
+Цей репозиторій містить структуровану документацію для підготовки до іспиту
+**Google Cloud Associate Cloud Engineer**.
+
+---
 
 ## 📋 Про іспит
 
-Google Cloud Associate Cloud Engineer - це сертифікація, яка підтверджує здатність розгортати додатки, моніторити операції та керувати корпоративними рішеннями в Google Cloud Platform.
+Google Cloud Associate Cloud Engineer - сертифікація, яка підтверджує здатність розгортати додатки,
+моніторити операції та керувати корпоративними рішеннями в Google Cloud Platform.
 
-## 📚 Структура репозиторію
+**Офіційні ресурси:**
 
-- **01-cloud-fundamentals/** - Основи хмарних обчислень
-- **02-gcp-core-services/** - Основні сервіси GCP
-- **03-compute-engine/** - Compute Engine (VM)
-- **04-kubernetes-engine/** - Google Kubernetes Engine (GKE)
-- **05-app-engine/** - App Engine
-- **06-cloud-functions/** - Cloud Functions
-- **07-storage/** - Сховища даних (Cloud Storage, Persistent Disks)
-- **08-databases/** - Бази даних (Cloud SQL, Firestore, Bigtable, Spanner)
-- **09-networking/** - Мережі (VPC, Load Balancing, Cloud DNS)
-- **10-iam-security/** - Identity and Access Management, безпека
-- **11-monitoring-logging/** - Cloud Monitoring, Cloud Logging
-- **12-deployment-management/** - Deployment Manager, Cloud Build
-- **13-practice-questions/** - Практичні питання та сценарії
-
-## 🎯 Ключові теми іспиту
-
-1. **Налаштування хмарного середовища**
-   - Проекти та облікові записи
-   - Біллінг
-   - Інсталяція Cloud SDK
-
-2. **Планування та конфігурація хмарного рішення**
-   - Вибір compute сервісів
-   - Вибір storage сервісів
-   - Планування мережі
-
-3. **Розгортання та імплементація**
-   - Compute Engine
-   - Google Kubernetes Engine
-   - App Engine, Cloud Functions
-   - Рішення для зберігання даних
-
-4. **Забезпечення успішної роботи**
-   - Управління ресурсами Compute Engine та GKE
-   - Управління сховищами та базами даних
-   - Управління мережею
-
-5. **Налаштування доступу та безпеки**
-   - IAM
-   - Service accounts
-   - Audit logs
-
-## 🔗 Корисні ресурси
-
-- [Офіційна документація GCP](https://cloud.google.com/docs)
 - [Exam Guide](https://cloud.google.com/certification/cloud-engineer)
+- [Офіційна документація GCP](https://cloud.google.com/docs)
 - [Google Cloud Skills Boost](https://www.cloudskillsboost.google/)
-- [GCP Free Tier](https://cloud.google.com/free)
 
-## 📝 Як використовувати цей репозиторій
+---
 
-1. Почніть з основ у папці `01-cloud-fundamentals`
-2. Послідовно вивчайте кожну тему
-3. Практикуйтеся з прикладами коду та командами gcloud
-4. Тестуйте знання за допомогою практичних питань
+## 📚 Зміст модулів
 
-## 🤝 Внесок
+### 🌥️ [01. Cloud Fundamentals](01-cloud-fundamentals/README.md)
 
-Якщо ви знайшли помилки або хочете додати корисну інформацію, створіть Pull Request або Issue.
+Основи хмарних обчислень, моделі обслуговування (IaaS/PaaS/SaaS), регіони та зони GCP
+
+### ⚙️ [02. GCP Core Services](02-gcp-core-services/README.md)
+
+Огляд основних сервісів: Compute, Storage, Database, Networking
+
+### 💻 [03. Compute Engine](03-compute-engine/README.md)
+
+VM instances, machine types, persistent disks, instance groups, autoscaling
+
+### ☸️ [04. Kubernetes Engine](04-kubernetes-engine/README.md)
+
+GKE basics, clusters, node pools, deployments, services
+
+### 🚀 [05. App Engine](05-app-engine/README.md)
+
+Standard vs Flexible environments, deployment, traffic splitting
+
+### ⚡ [06. Cloud Functions](06-cloud-functions/README.md)
+
+Serverless functions, triggers (HTTP, Cloud Storage, Pub/Sub)
+
+### 💾 [07. Storage](07-storage/README.md)
+
+Cloud Storage, storage classes, persistent disks, Filestore
+
+### 🗄️ [08. Databases](08-databases/README.md)
+
+Cloud SQL, Cloud Spanner, Firestore, Bigtable
+
+### 🌐 [09. Networking](09-networking/README.md)
+
+VPC, firewall rules, load balancing, Cloud DNS, VPN, Interconnect
+
+### 🔐 [10. IAM & Security](10-iam-security/README.md)
+
+Identity and Access Management, service accounts, roles, best practices
+
+### 📊 [11. Monitoring & Logging](11-monitoring-logging/README.md)
+
+Cloud Monitoring, Cloud Logging, alerting
+
+### 🛠️ [12. Deployment & Management](12-deployment-management/README.md)
+
+Cloud SDK, Deployment Manager, Cloud Build, Infrastructure as Code
+
+### 📝 [13. Practice Questions](13-practice-questions/README.md)
+
+Scenario-based questions, mixed topics, exam preparation
+
+---
+
+## 📖 [Glossary](glossary.md)
+
+Термінологічний словник з перекладами (English/Українська)
+
+---
+
+## 🎯 Рекомендований план навчання
+
+**Тиждень 1-2:** Модулі 01-04 (Fundamentals → Core Services → Compute Engine → GKE)  
+**Тиждень 3:** Модулі 05-07 (App Engine → Cloud Functions → Storage)  
+**Тиждень 4:** Модулі 08-10 (Databases → Networking → IAM)  
+**Тиждень 5:** Модулі 11-12 (Monitoring → Deployment)  
+**Тиждень 6:** Модуль 13 + повторення всіх екзаменаційних питань
+
+---
 
 ## 📄 Ліцензія
 
@@ -74,4 +96,4 @@ MIT License - використовуйте матеріали вільно дл�
 
 ---
 
-**Успіхів на іспиті! 🚀**
+## Успіхів на іспиті! 🚀

@@ -6,7 +6,8 @@
 
 ## Module Goal (English)
 
-This module covers Google Kubernetes Engine - a managed Kubernetes service for container orchestration. You will learn to create clusters, manage workloads, and use GKE for production deployments.
+This module covers Google Kubernetes Engine - a managed Kubernetes service for container orchestration.
+You will learn to create clusters, manage workloads, and use GKE for production deployments.
 
 ## Topics
 
