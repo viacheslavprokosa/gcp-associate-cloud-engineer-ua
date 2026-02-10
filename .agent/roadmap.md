@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 10:48
+**Last Updated:** 2026-02-10 10:50
 
 ---
 
@@ -92,6 +92,17 @@
   - High availability topologies
   - Cross-references to Modules 03, 07, 08, 09, 10
 
+- ✅ **cloud-sql.md** (18 → 788+ lines)
+  - Added Cloud SQL fundamentals for MySQL, PostgreSQL, SQL Server
+  - Comprehensive HA configuration with regional persistent disks
+  - Read replicas (cross-zone, cross-region, external)
+  - Backup and recovery strategies (automated, on-demand, PITR)
+  - Connectivity options (Public IP, Private IP, Cloud SQL Proxy)
+  - Migration strategies (DMS, mysqldump, external replica promotion)
+  - Security (encryption, IAM integration, database users)
+  - E-commerce platform practical scenario
+  - Cross-references to Modules 03, 04, 05, 07, 09, 10
+
 ---
 
 ## 🔄 Current Focus
@@ -118,8 +129,10 @@
    - [x] vpn-interconnect.md - Cloud VPN, Interconnect options ✅
 
 2. **Expand database files:**
-   - [ ] cloud-sql.md - Add HA, replication, backup theory
-   - [ ] Add cross-references to storage and compute
+   - [x] cloud-sql.md - Add HA, replication, backup theory ✅
+   - [ ] cloud-spanner.md - Global database, consistency
+   - [ ] firestore.md - NoSQL document database
+   - [ ] bigtable.md - Wide-column NoSQL
 
 3. **Expand IAM files:**
    - [ ] iam-basics.md - Add IAM hierarchy, policy evaluation
@@ -160,10 +173,11 @@
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
+| 08 | 1/4 | ~770 | 🟡 In Progress |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
-| 04-08, 10-13 | 0 | 0 | ⚪ Not Started |
+| 04-07, 10-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~40% of deep theory expansion completed
+**Total Progress:** ~42% of deep theory expansion completed
 
 ---
 
