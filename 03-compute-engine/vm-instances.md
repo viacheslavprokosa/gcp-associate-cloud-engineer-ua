@@ -729,4 +729,24 @@ gcloud compute instances create my-vm \
 
 ---
 
+## Cross-References
+
+**Пов'язані теми в цьому модулі:**
+
+- [Machine Types](machine-types.md) - Вибір CPU/RAM конфігурації
+- [Disks and Images](disks-and-images.md) - Boot disks, snapshots, images
+- [Instance Groups](instance-groups.md) - Managed Instance Groups для auto-scaling
+
+**Інші модулі:**
+
+- [Module 07 - Cloud Storage](../07-storage/cloud-storage.md) - Інтеграція з Cloud Storage через metadata
+- [Module 09 - VPC](../09-networking/vpc.md) - Мережева конфігурація VM
+- [Module 09 - Load Balancing](../09-networking/load-balancing.md) - Health checks для VM
+- [Module 10 - Service Accounts](../10-iam-security/service-accounts.md) - IAM permissions для VM
+- [Module 11 - Cloud Monitoring](../11-monitoring-logging/cloud-monitoring.md) - Ops Agent для моніторингу
+- [Module 11 - Cloud Logging](../11-monitoring-logging/cloud-logging.md) - Startup script logs
+- [Module 12 - Cloud SDK](../12-deployment-management/cloud-sdk.md) - gcloud commands для VM
+
+---
+
 **Повернутися до:** [Модуль 03 - Compute Engine](README.md)
