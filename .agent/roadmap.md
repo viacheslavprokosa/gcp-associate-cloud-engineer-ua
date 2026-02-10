@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 15:22
+**Last Updated:** 2026-02-10 15:28
 
 ---
 
@@ -147,6 +147,16 @@
   - Multi-environment setup practical scenario
   - Cross-references to Modules 03, 04, 07, 08, 09
 
+- ✅ **service-accounts.md** (17 → 657+ lines)
+  - Added service account fundamentals and types
+  - User-managed, default, and Google-managed service accounts
+  - Service account lifecycle (create, grant, delete)
+  - Authentication methods (metadata server, keys, Workload Identity)
+  - Service account impersonation
+  - Keys management and rotation
+  - Multi-tier application practical scenario
+  - Cross-references to Modules 03, 04, 06, 07, 08
+
 ---
 
 ## 🔄 Current Focus
@@ -180,7 +190,7 @@
 
 3. **Expand IAM files:**
    - [x] iam-basics.md - Add IAM hierarchy, policy evaluation ✅
-   - [ ] service-accounts.md - Add practical examples
+   - [x] service-accounts.md - Add practical examples ✅
    - [ ] roles-and-permissions.md - Custom roles
    - [ ] best-practices.md - Security best practices
 
@@ -220,10 +230,10 @@
 | 03 | 1/4 | ~370 | 🟡 In Progress |
 | 08 | 4/4 | ~3,070 | ✅ **COMPLETED** |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
-| 10 | 1/4 | ~750 | 🟡 In Progress |
+| 10 | 2/4 | ~1,410 | 🟡 In Progress |
 | 04-07, 11-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~52% of deep theory expansion completed
+**Total Progress:** ~54% of deep theory expansion completed
 
 ---
 
