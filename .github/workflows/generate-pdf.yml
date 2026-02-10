@@ -44,6 +44,15 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-npm-global-
 
+            # Cache Puppeteer Chromium
+            - name: Cache Puppeteer Chromium
+              uses: actions/cache@v4
+              with:
+                  path: ~/.cache/puppeteer
+                  key: ${{ runner.os }}-puppeteer-${{ hashFiles('.github/workflows/generate-pdf.yml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-puppeteer-
+
             - name: Install Pandoc
               run: |
                   sudo apt-get update
