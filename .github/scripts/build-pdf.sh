@@ -63,11 +63,10 @@ echo "📚 Generating PDF with Pandoc..."
 # Add wrapper script directory to PATH (so mermaid-filter uses our mmdc wrapper)
 export PATH="$(pwd)/.github/scripts:$PATH"
 
-# Generate PDF using Pandoc
+# Generate PDF using Pandoc (without mermaid-filter to avoid sandbox issues)
 pandoc "$TEMP_FILE" \
     --metadata-file=.github/scripts/metadata.yaml \
     --pdf-engine=xelatex \
-    --filter=mermaid-filter \
     --highlight-style=tango \
     --number-sections \
     --toc \
