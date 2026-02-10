@@ -1,8 +1,148 @@
 # Storage Services
 
-## Огляд
+## Вступ: Розуміння типів сховищ
 
-GCP надає різні типи сховищ для різних потреб: об'єктне, блокове та файлове сховище.
+### Три фундаментальні типи storage
+
+Перед вивченням конкретних сервісів GCP, критично важливо зрозуміти три базові типи сховищ та їх призначення:
+
+```mermaid
+graph TB
+    A[Storage Types] --> B[Object Storage]
+    A --> C[Block Storage]
+    A --> D[File Storage]
+    
+    B --> B1[HTTP/API Access]
+    B --> B2[Unstructured Data]
+    B --> B3[Cloud Storage]
+    
+    C --> C1[Block Device]
+    C --> C2[VM Attached]
+    C --> C3[Persistent Disk]
+    
+    D --> D1[File System]
+    D --> D2[NFS Protocol]
+    D --> D3[Filestore]
+    
+    style A fill:#4285f4,color:#fff
+    style B fill:#34a853,color:#fff
+    style C fill:#fbbc04
+    style D fill:#ea4335,color:#fff
+```
+
+#### 1. Object Storage (Об'єктне сховище)
+
+**Концепція:** Дані зберігаються як об'єкти з метаданими, доступ через HTTP/API.
+
+**Аналогія:** Як бібліотека - кожна книга (об'єкт) має унікальний номер (key) та картку з інформацією (metadata).
+
+**Характеристики:**
+
+- ✅ Необмежена масштабованість
+- ✅ Глобальна доступність
+- ✅ Дешеве зберігання
+- ❌ Не можна монтувати як диск
+- ❌ Не підходить для баз даних
+
+**GCP сервіс:** Cloud Storage
+
+---
+
+#### 2. Block Storage (Блокове сховище)
+
+**Концепція:** Дані зберігаються у фіксованих блоках, доступ як до звичайного диску.
+
+**Аналогія:** Як жорсткий диск у вашому комп'ютері - можна створити файлову систему, встановити ОС, запустити базу даних.
+
+**Характеристики:**
+
+- ✅ Низька латентність
+- ✅ Високий IOPS
+- ✅ Підходить для баз даних
+- ❌ Прив'язане до VM
+- ❌ Складніше масштабувати
+
+**GCP сервіс:** Persistent Disk, Local SSD
+
+---
+
+#### 3. File Storage (Файлове сховище)
+
+**Концепція:** Ієрархічна файлова система, доступ через NFS протокол.
+
+**Аналогія:** Як мережева папка (network share) - кілька користувачів можуть одночасно працювати з файлами.
+
+**Характеристики:**
+
+- ✅ Спільний доступ між VM
+- ✅ POSIX-сумісність
+- ✅ Підходить для legacy додатків
+- ❌ Дорожче за block storage
+- ❌ Обмежена масштабованість
+
+**GCP сервіс:** Filestore
+
+---
+
+### Коли використовувати кожен тип?
+
+```mermaid
+graph TD
+    A{Що ви зберігаєте?} --> B{Structured data?}
+    B -->|Так| C[Database Service<br/>Module 08]
+    B -->|Ні| D{Як будете читати?}
+    
+    D -->|HTTP/API| E{Як часто?}
+    E -->|Часто| F[Cloud Storage<br/>Standard]
+    E -->|Рідко| G[Cloud Storage<br/>Nearline/Coldline]
+    
+    D -->|Block device| H{Shared access?}
+    H -->|Ні| I[Persistent Disk]
+    H -->|Так, read-only| J[Persistent Disk<br/>multi-attach]
+    H -->|Так, read-write| K[Filestore]
+    
+    style C fill:#ea4335,color:#fff
+    style F fill:#34a853,color:#fff
+    style G fill:#34a853,color:#fff
+    style I fill:#4285f4,color:#fff
+    style K fill:#fbbc04
+```
+
+---
+
+### Зв'язки з іншими модулями
+
+**Module 03 (Compute Engine):**
+
+- Persistent Disk як boot та data диски для VM
+- Local SSD для high-performance workloads
+- [VM Instances](../03-compute-engine/vm-instances.md) потребують storage
+
+**Module 04 (Kubernetes Engine):**
+
+- Persistent Volumes використовують Persistent Disk або Filestore
+- [GKE Storage](../04-kubernetes-engine/README.md) інтеграція
+
+**Module 07 (Storage - детальніше):**
+
+- Глибше вивчення Cloud Storage classes
+- [Storage optimization](../07-storage/README.md) стратегії
+
+**Module 08 (Databases):**
+
+- Бази даних використовують Persistent Disk під капотом
+- [Database storage](../08-databases/README.md) вимоги
+
+**Module 12 (Deployment):**
+
+- Cloud Storage для artifacts та images
+- [CI/CD storage](../12-deployment-management/README.md) patterns
+
+---
+
+## Огляд сервісів
+
+Тепер, коли ми розуміємо фундаментальні типи, розглянемо конкретні GCP сервіси:
 
 ---
 
