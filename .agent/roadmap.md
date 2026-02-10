@@ -235,6 +235,32 @@
   - Environment variables and Secret Manager integration
   - Cross-references to Modules 04, 05, 12
 
+### Module 06 - Cloud Functions ✅ **COMPLETED**
+
+- ✅ **triggers.md** (30 → 620 lines)
+  - Added Cloud Functions triggers fundamentals
+  - HTTP triggers (authentication, methods)
+  - Cloud Storage triggers (event types, image processing)
+  - Pub/Sub triggers (message publishing)
+  - Firestore triggers (document events)
+  - Firebase triggers (Auth, Realtime Database)
+  - Cloud Scheduler triggers (cron scheduling)
+  - Eventarc triggers
+  - E-commerce order processing practical scenario
+  - Cross-references to Modules 05, 07, 08, 12
+
+- ✅ **deployment.md** (26 → 630 lines)
+  - Added deployment fundamentals and project structure
+  - Deployment commands (HTTP, Pub/Sub, Storage)
+  - Runtimes (Python, Node.js, Go, Java, .NET, Ruby, PHP)
+  - Function configuration (memory, timeout, concurrency)
+  - Environment variables management
+  - Secret Manager integration
+  - Version management
+  - Logging and monitoring
+  - Image processing practical scenario
+  - Cross-references to Modules 05, 06, 12
+
 ---
 
 ## 🔄 Current Focus
@@ -284,11 +310,10 @@
    - [x] clusters-and-nodes.md - Add node management ✅
    - [x] workloads.md - Add deployment strategies ✅
 
-3. **Expand remaining modules:** ✅ **Module 05 COMPLETED**
+3. **Expand remaining modules:** ✅ **Module 06 COMPLETED**
    - [x] App Engine files ✅
-   - [ ] Cloud Functions files
+   - [x] Cloud Functions files ✅
    - [ ] Storage files
-   - [ ] Deployment files
 
 ### Long-term
 
@@ -309,12 +334,13 @@
 | 03 | 1/4 | ~370 | 🟡 In Progress |
 | 04 | 3/3 | ~2,100 | ✅ **COMPLETED** |
 | 05 | 2/2 | ~1,250 | ✅ **COMPLETED** |
+| 06 | 2/2 | ~1,250 | ✅ **COMPLETED** |
 | 08 | 4/4 | ~3,070 | ✅ **COMPLETED** |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
 | 10 | 4/4 | ~2,660 | ✅ **COMPLETED** |
-| 06-07, 11-13 | 0 | 0 | ⚪ Not Started |
+| 07, 11-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~63% of deep theory expansion completed
+**Total Progress:** ~66% of deep theory expansion completed
 
 ---
 
