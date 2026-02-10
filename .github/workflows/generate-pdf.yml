@@ -54,28 +54,17 @@ jobs:
               run: |
                   sudo apt-get install -y texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-lang-cyrillic
 
-            # Install Chromium dependencies for mermaid-cli
-            - name: Install Chromium dependencies
+            # Install Playwright dependencies for mermaid-cli
+            - name: Install Playwright dependencies
               run: |
-                  sudo apt-get install -y \
-                    chromium-browser \
-                    libnss3 \
-                    libatk1.0-0 \
-                    libatk-bridge2.0-0 \
-                    libcups2 \
-                    libdrm2 \
-                    libxkbcommon0 \
-                    libxcomposite1 \
-                    libxdamage1 \
-                    libxfixes3 \
-                    libxrandr2 \
-                    libgbm1 \
-                    libasound2
+                  npx playwright install-deps chromium
 
             - name: Install Mermaid Filter
               run: |
                   npm install -g @mermaid-js/mermaid-cli
                   npm install -g mermaid-filter
+                  # Install Playwright browsers
+                  npx -y playwright install chromium
               env:
                   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
                   PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium-browser
