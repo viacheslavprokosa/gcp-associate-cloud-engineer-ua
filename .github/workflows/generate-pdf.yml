@@ -1,0 +1,57 @@
+name: Generate PDF Book
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'pdf-book/**'
+      - '.agent/**'
+      - '.github/workflows/**'
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+      
+      - name: Install LaTeX
+        run: |
+          sudo apt-get install -y texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-lang-cyrillic
+      
+      - name: Install Mermaid Filter
+        run: |
+          npm install -g @mermaid-js/mermaid-cli
+          npm install -g mermaid-filter
+      
+      - name: Create pdf-book directory
+        run: mkdir -p pdf-book
+      
+      - name: Generate PDF
+        run: |
+          chmod +x .github/scripts/build-pdf.sh
+          .github/scripts/build-pdf.sh
+      
+      - name: Commit and Push PDF
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add pdf-book/GCP-Associate-CE.pdf
+          git diff --staged --quiet || git commit -m "📚 Auto-generate PDF book [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

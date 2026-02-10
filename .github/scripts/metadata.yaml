@@ -1,0 +1,41 @@
+---
+title: "Google Cloud Associate Cloud Engineer"
+subtitle: "Підготовка до сертифікаційного іспиту"
+author: "Vyacheslav Prokosa"
+date: \today
+lang: uk-UA
+documentclass: book
+papersize: a4
+fontsize: 11pt
+geometry:
+  - margin=2.5cm
+mainfont: DejaVu Sans
+monofont: DejaVu Sans Mono
+linkcolor: blue
+urlcolor: blue
+toccolor: black
+toc: true
+toc-depth: 3
+numbersections: true
+lof: false
+lot: false
+header-includes: |
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhead[L]{GCP Associate Cloud Engineer}
+  \fancyhead[R]{\thepage}
+  \usepackage{xcolor}
+  \definecolor{codebg}{RGB}{245,245,245}
+  \usepackage{listings}
+  \lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    xleftmargin=2em,
+    framexleftmargin=1.5em
+  }
+---
+

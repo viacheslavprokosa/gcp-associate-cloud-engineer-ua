@@ -21,3 +21,11 @@ node_modules/
 
 # Notes
 .notes/
+
+# Pandoc temporary files
+*.aux
+*.out
+*.toc
+pdf-book/combined.md
+# But allow PDF output
+!pdf-book/*.pdf

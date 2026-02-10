@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 18:30
+**Last Updated:** 2026-02-10
 
 ---
 
@@ -162,6 +162,20 @@ All 13 modules expanded with comprehensive theory, 45 practice questions created
 8. `feat(module-10): expand iam-basics, service-accounts, roles, best-practices`
 9. `feat(modules-11-12): expand monitoring, logging, alerting, cloud-sdk, cloud-build`
 10. `feat(modules-12-13): complete deployment-manager and add 45 practice questions`
+11. `feat(infrastructure): add automated PDF book generation workflow`
+
+---
+
+## 🔧 Infrastructure
+
+### PDF Book Generation ✅
+
+- GitHub Actions workflow for automated PDF generation
+- Pandoc configuration with Ukrainian language support
+- Mermaid diagram support via mermaid-filter
+- Build script for collecting and ordering Markdown files
+- Automatic commit of generated PDF to repository
+- Documentation in `pdf-book/README.md`
 
 ---
 
