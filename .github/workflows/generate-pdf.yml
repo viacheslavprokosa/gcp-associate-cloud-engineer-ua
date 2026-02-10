@@ -53,20 +53,15 @@ jobs:
               run: |
                   sudo apt-get install -y texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-lang-cyrillic
 
-            # Install Playwright dependencies for mermaid-cli
-            - name: Install Playwright dependencies
+            # Install Puppeteer with Chromium for mermaid-cli
+            - name: Install Puppeteer with Chromium
               run: |
-                  npx playwright install-deps chromium
+                  npm install -g puppeteer
 
             - name: Install Mermaid Filter
               run: |
                   npm install -g @mermaid-js/mermaid-cli
                   npm install -g mermaid-filter
-                  # Install Playwright browsers
-                  npx -y playwright install chromium
-              env:
-                  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-                  PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium-browser
 
             - name: Create pdf-book directory
               run: mkdir -p pdf-book
