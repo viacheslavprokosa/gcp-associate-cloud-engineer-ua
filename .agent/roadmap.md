@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 10:41
+**Last Updated:** 2026-02-10 10:46
 
 ---
 
@@ -57,6 +57,19 @@
   - 3-tier web application practical scenario
   - Cross-references to Modules 01, 03, 04, 07, 10
 
+- ✅ **load-balancing.md** (10 → 947+ lines)
+  - Added OSI model explanation (Layer 3, 4, 7)
+  - Comprehensive coverage of all 6 GCP load balancer types
+  - Decision tree for load balancer selection
+  - Health checks theory and practical examples
+  - External HTTP(S) LB with global anycast IP
+  - External Network LB with client IP preservation
+  - Internal HTTP(S) LB for microservices
+  - Internal TCP/UDP LB for databases
+  - Advanced features: Session affinity, Cloud Armor, Cloud CDN
+  - E-commerce platform practical scenario
+  - Cross-references to Modules 03, 04, 05, 10, 11
+
 ---
 
 ## 🔄 Current Focus
@@ -78,8 +91,9 @@
 
 1. **Expand networking files:**
    - [x] vpc.md - Add VPC fundamentals, subnets, routing ✅
-   - [ ] load-balancing.md - LB types, decision tree
-   - [ ] Add cross-references to Modules 03, 04
+   - [x] load-balancing.md - LB types, decision tree ✅
+   - [ ] cloud-dns.md - DNS zones, records, DNSSEC
+   - [ ] vpn-interconnect.md - Cloud VPN, Interconnect options
 
 2. **Expand database files:**
    - [ ] cloud-sql.md - Add HA, replication, backup theory
@@ -124,10 +138,10 @@
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
-| 09 | 1/4 | ~765 | 🟡 In Progress |
+| 09 | 2/4 | ~1,712 | 🟡 In Progress |
 | 04-08, 10-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~25% of deep theory expansion completed
+**Total Progress:** ~30% of deep theory expansion completed
 
 ---
 
