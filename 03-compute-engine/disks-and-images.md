@@ -290,14 +290,58 @@ gcloud compute instances create my-vm \
 
 ## Snapshots
 
-**Опис:** Incremental backup persistent disks.
+**Опис:** Incremental backup persistent disks для disaster recovery та data migration.
+
+### Як працюють Snapshots?
+
+**Incremental Nature:**
+
+- Перший snapshot - full copy всіх даних на диску
+- Наступні snapshots - тільки зміни (deltas) з попереднього snapshot
+- Snapshots зберігаються у Cloud Storage (multi-regional)
+- Автоматичне compression та deduplication
+
+```mermaid
+graph LR
+    D1[Disk<br/>100 GB] -->|Day 1| S1[Snapshot 1<br/>100 GB]
+    D2[Disk<br/>105 GB] -->|Day 2| S2[Snapshot 2<br/>+5 GB delta]
+    D3[Disk<br/>110 GB| -->|Day 3| S3[Snapshot 3<br/>+5 GB delta]
+    
+    S1 -.->|Chain| S2
+    S2 -.->|Chain| S3
+    
+    style S1 fill:#4285f4,color:#fff
+    style S2 fill:#34a853,color:#fff
+    style S3 fill:#fbbc04
+```
+
+**Snapshot Chain:**
+
+- Snapshots формують ланцюг (chain)
+- Видалення snapshot в середині chain не впливає на інші
+- Google автоматично consolidates data
 
 ### Характеристики
 
-- Incremental (тільки зміни)
-- Глобальний ресурс
-- Можна створювати з running VM
-- Автоматичне стиснення
+**Storage:**
+
+- Глобальний ресурс (доступний у всіх регіонах)
+- Multi-regional storage для durability
+- Compression автоматичний (зменшує розмір)
+- Incremental forever (не потрібні full backups)
+
+**Performance:**
+
+- Можна створювати з running VM (без downtime)
+- VSS (Volume Shadow Copy) для Windows
+- Application-consistent snapshots (з quiescing)
+- Restore швидше за full backup
+
+**Pricing:**
+
+- Оплата за фактичний розмір (після compression)
+- Incremental storage (тільки зміни)
+- Multi-regional storage pricing
 
 ### Створення та використання
 
@@ -312,6 +356,11 @@ gcloud compute disks create new-disk \
   --source-snapshot=my-snapshot \
   --zone=us-central1-b
 
+# Створити диск у іншому регіоні (DR)
+gcloud compute disks create dr-disk \
+  --source-snapshot=my-snapshot \
+  --zone=europe-west1-b
+
 # Список snapshots
 gcloud compute snapshots list
 
@@ -321,74 +370,190 @@ gcloud compute snapshots delete my-snapshot
 
 ### Snapshot Schedule
 
-Автоматичні snapshots за розкладом:
+Автоматичні snapshots за розкладом для disaster recovery.
+
+**Створення schedule:**
 
 ```bash
-# Створити schedule
+# Щоденні snapshots
 gcloud compute resource-policies create snapshot-schedule daily-backup \
   --max-retention-days=7 \
   --start-time=02:00 \
   --daily-schedule \
   --region=us-central1
 
-# Приєднати до диску
+# Щотижневі snapshots
+gcloud compute resource-policies create snapshot-schedule weekly-backup \
+  --max-retention-days=30 \
+  --start-time=03:00 \
+  --weekly-schedule \
+  --weekly-schedule-from-file=schedule.json \
+  --region=us-central1
+
+# Щогодинні snapshots
+gcloud compute resource-policies create snapshot-schedule hourly-backup \
+  --max-retention-days=2 \
+  --start-time=00:00 \
+  --hourly-schedule=4 \
+  --region=us-central1
+```
+
+**Приєднання до диску:**
+
+```bash
 gcloud compute disks add-resource-policies my-disk \
   --resource-policies=daily-backup \
   --zone=us-central1-a
 ```
 
+### Snapshot Best Practices
+
+**1. Retention Strategy**
+
+- **Daily**: 7 днів (для recent recovery)
+- **Weekly**: 4 тижні (для monthly recovery)
+- **Monthly**: 12 місяців (для compliance)
+- **Yearly**: Довгострокове зберігання
+
+**2. Application-Consistent Snapshots**
+
+```bash
+# Linux: Flush filesystem buffers
+sync
+
+# MySQL: Flush tables
+mysql -e "FLUSH TABLES WITH READ LOCK;"
+
+# Create snapshot
+gcloud compute disks snapshot db-disk \
+  --snapshot-names=db-snapshot-$(date +%Y%m%d) \
+  --zone=us-central1-a
+
+# MySQL: Unlock tables
+mysql -e "UNLOCK TABLES;"
+```
+
+**3. Cross-Region DR**
+
+- Створюйте snapshots у production region
+- Restore диски у DR region для testing
+- Snapshots автоматично multi-regional
+
+**4. Cost Optimization**
+
+- Видаляйте старі snapshots (automated retention)
+- Incremental nature зменшує storage costs
+- Compression автоматичний
+
+> ⚠️ **Важливо для іспиту**: Snapshots - incremental forever. Видалення snapshot в середині chain не впливає на інші snapshots.
+
 ---
 
 ## Images
 
-**Опис:** Boot disk templates для створення VM.
+**Опис:** Boot disk templates для створення VM instances.
 
-### Типи
+### Типи Images
 
-- **Public images**: Надані Google та партнерами (Debian, Ubuntu, Windows)
-- **Custom images**: Створені з ваших дисків
-- **Machine images**: Повна конфігурація VM (диски + metadata)
+#### Public Images
 
-### Створення custom image
+**Опис:** Images надані Google та партнерами.
 
-```bash
-# З диску
-gcloud compute images create my-image \
-  --source-disk=my-disk \
-  --source-disk-zone=us-central1-a
+**Доступні OS:**
 
-# З snapshot
-gcloud compute images create my-image \
-  --source-snapshot=my-snapshot
+- **Linux**: Debian, Ubuntu, CentOS, RHEL, SUSE, Rocky Linux
+- **Windows**: Windows Server 2012/2016/2019/2022
+- **Specialized**: Container-Optimized OS, SQL Server
 
-# З іншого image
-gcloud compute images create my-image \
-  --source-image=source-image \
-  --source-image-project=source-project
-```
+**Характеристики:**
 
-### Використання image
+- Безкоштовні (крім Windows та premium OS)
+- Регулярні security updates
+- Optimized для GCP
+- Automatic updates через image families
+
+**Приклад:**
 
 ```bash
+# Список public images
+gcloud compute images list --project=debian-cloud
+
+# Створити VM з public image
 gcloud compute instances create my-vm \
-  --image=my-image \
+  --image-family=debian-11 \
+  --image-project=debian-cloud \
   --zone=us-central1-a
 ```
 
 ---
 
-## Machine Images
+#### Custom Images
+
+**Опис:** Images створені з ваших дисків або інших images.
+
+**Use Cases:**
+
+- Standardized VM configurations
+- Pre-installed software
+- Custom OS configurations
+- Golden images для deployments
+
+**Створення з диску:**
+
+```bash
+# Зупинити VM (recommended)
+gcloud compute instances stop my-vm --zone=us-central1-a
+
+# Створити image з boot disk
+gcloud compute images create my-custom-image \
+  --source-disk=my-vm \
+  --source-disk-zone=us-central1-a \
+  --family=my-app
+
+# Створити image з running VM (може бути inconsistent)
+gcloud compute images create my-image \
+  --source-disk=my-disk \
+  --source-disk-zone=us-central1-a \
+  --force
+```
+
+**Створення з snapshot:**
+
+```bash
+gcloud compute images create my-image \
+  --source-snapshot=my-snapshot \
+  --family=my-app
+```
+
+**Створення з іншого image:**
+
+```bash
+# Copy image між projects
+gcloud compute images create my-image \
+  --source-image=source-image \
+  --source-image-project=source-project
+```
+
+---
+
+#### Machine Images
 
 **Опис:** Повна конфігурація VM instance (всі диски + metadata + network).
 
-### Відмінності від Custom Image
+**Відмінності від Custom Image:**
 
-- Machine Image: Вся VM конфігурація
-- Custom Image: Тільки boot disk
+| Feature | Custom Image | Machine Image |
+|---------|--------------|---------------|
+| **Scope** | Boot disk only | Entire VM config |
+| **Disks** | Boot disk | All attached disks |
+| **Metadata** | No | Yes |
+| **Network** | No | Yes (tags, IP) |
+| **Use Case** | Template | Backup/Clone |
 
-### Створення
+**Створення:**
 
 ```bash
+# Створити machine image
 gcloud compute machine-images create my-machine-image \
   --source-instance=my-vm \
   --source-instance-zone=us-central1-a
@@ -399,17 +564,35 @@ gcloud compute instances create new-vm \
   --zone=us-central1-b
 ```
 
+**Коли використовувати:**
+
+- ✅ Backup всієї VM configuration
+- ✅ Clone VM з усіма дисками
+- ✅ Disaster recovery
+- ✅ Migration між zones/regions
+- ❌ Template для багатьох VMs (краще custom image)
+
 ---
 
-## Image Families
+### Image Families
 
-**Опис:** Групування версій images.
+**Опис:** Групування версій images для automatic updates.
 
-### Використання
+**Як працює:**
+
+- Image family містить multiple versions
+- Latest image автоматично використовується
+- Versioning для rollback
 
 ```bash
 # Створити image в family
-gcloud compute images create my-image-v2 \
+gcloud compute images create my-app-v1 \
+  --source-disk=my-disk \
+  --family=my-app \
+  --source-disk-zone=us-central1-a
+
+# Створити новішу версію
+gcloud compute images create my-app-v2 \
   --source-disk=my-disk \
   --family=my-app \
   --source-disk-zone=us-central1-a
@@ -418,7 +601,478 @@ gcloud compute images create my-image-v2 \
 gcloud compute instances create my-vm \
   --image-family=my-app \
   --zone=us-central1-a
+
+# Використати specific version
+gcloud compute instances create my-vm \
+  --image=my-app-v1 \
+  --zone=us-central1-a
 ```
+
+**Best Practices:**
+
+- Використовуйте image families для production
+- Deprecate старі images (не видаляйте одразу)
+- Semantic versioning (v1, v2, v3)
+
+---
+
+### Image Sharing
+
+**Sharing між Projects:**
+
+```bash
+# Надати доступ іншому project
+gcloud compute images add-iam-policy-binding my-image \
+  --member='serviceAccount:PROJECT_ID@cloudservices.gserviceaccount.com' \
+  --role='roles/compute.imageUser'
+
+# Використати shared image
+gcloud compute instances create my-vm \
+  --image=my-image \
+  --image-project=source-project \
+  --zone=us-central1-a
+```
+
+**Public Images:**
+
+```bash
+# Зробити image public (обережно!)
+gcloud compute images add-iam-policy-binding my-image \
+  --member='allAuthenticatedUsers' \
+  --role='roles/compute.imageUser'
+```
+
+---
+
+### Image Encryption
+
+**Google-managed encryption:**
+
+- Default для всіх images
+- Automatic encryption at rest
+- No configuration needed
+
+**Customer-managed encryption keys (CMEK):**
+
+```bash
+# Створити image з CMEK
+gcloud compute images create my-image \
+  --source-disk=my-disk \
+  --source-disk-zone=us-central1-a \
+  --kms-key=projects/PROJECT_ID/locations/LOCATION/keyRings/RING/cryptoKeys/KEY
+```
+
+**Customer-supplied encryption keys (CSEK):**
+
+```bash
+# Створити image з CSEK
+gcloud compute images create my-image \
+  --source-disk=my-disk \
+  --source-disk-zone=us-central1-a \
+  --csek-key-file=key.json
+```
+
+> ⚠️ **Важливо для іспиту**: Image families автоматично використовують latest image. Machine images містять всю VM configuration, custom images - тільки boot disk.
+
+---
+
+## Disk Encryption
+
+Всі persistent disks автоматично шифруються at rest. Google Cloud пропонує 3 типи encryption keys.
+
+### Google-managed Encryption Keys (Default)
+
+**Характеристики:**
+
+- Automatic encryption для всіх дисків
+- Google управляє ключами
+- No configuration needed
+- No additional cost
+- Rotation автоматичний
+
+**Використання:**
+
+```bash
+# Default - encryption автоматичний
+gcloud compute disks create my-disk \
+  --size=100GB \
+  --zone=us-central1-a
+```
+
+---
+
+### Customer-managed Encryption Keys (CMEK)
+
+**Характеристики:**
+
+- Ви контролюєте encryption keys через Cloud KMS
+- Можна rotate, disable, destroy keys
+- Audit logging для key usage
+- Additional cost за Cloud KMS
+- Compliance requirements (HIPAA, PCI-DSS)
+
+**Створення диску з CMEK:**
+
+```bash
+# Створити KMS key
+gcloud kms keyrings create my-keyring \
+  --location=us-central1
+
+gcloud kms keys create my-key \
+  --location=us-central1 \
+  --keyring=my-keyring \
+  --purpose=encryption
+
+# Створити диск з CMEK
+gcloud compute disks create my-disk \
+  --size=100GB \
+  --zone=us-central1-a \
+  --kms-key=projects/PROJECT_ID/locations/us-central1/keyRings/my-keyring/cryptoKeys/my-key
+```
+
+**Створення VM з CMEK boot disk:**
+
+```bash
+gcloud compute instances create my-vm \
+  --zone=us-central1-a \
+  --boot-disk-size=100GB \
+  --boot-disk-kms-key=projects/PROJECT_ID/locations/us-central1/keyRings/my-keyring/cryptoKeys/my-key
+```
+
+**Key Rotation:**
+
+- Automatic rotation (90 днів default)
+- Manual rotation on-demand
+- Old versions зберігаються для decryption
+
+---
+
+### Customer-supplied Encryption Keys (CSEK)
+
+**Характеристики:**
+
+- Ви надаєте власні encryption keys
+- Google не зберігає ваші keys
+- Ви відповідаєте за key management
+- Найвищий рівень контролю
+- Складніше у використанні
+
+**Створення key file:**
+
+```json
+[
+  {
+    "uri": "https://www.googleapis.com/compute/v1/projects/PROJECT_ID/zones/ZONE/disks/DISK_NAME",
+    "key": "BASE64_ENCODED_KEY",
+    "key-type": "raw"
+  }
+]
+```
+
+**Створення диску з CSEK:**
+
+```bash
+# Створити диск з CSEK
+gcloud compute disks create my-disk \
+  --size=100GB \
+  --zone=us-central1-a \
+  --csek-key-file=key.json
+
+# Приєднати диск (потрібен той самий key!)
+gcloud compute instances attach-disk my-vm \
+  --disk=my-disk \
+  --csek-key-file=key.json \
+  --zone=us-central1-a
+```
+
+**Важливо:**
+
+- Втрата key = втрата даних (Google не може допомогти)
+- Потрібен key для кожної операції з диском
+- Backup keys критично важливий
+
+---
+
+### Порівняння Encryption Methods
+
+| Feature | Google-managed | CMEK | CSEK |
+|---------|----------------|------|------|
+| **Control** | Google | Shared | Full |
+| **Key Storage** | Google | Cloud KMS | Your infrastructure |
+| **Rotation** | Automatic | Automatic/Manual | Manual |
+| **Cost** | Free | Cloud KMS cost | Free (+ your infrastructure) |
+| **Complexity** | Lowest | Medium | Highest |
+| **Use Case** | Default | Compliance | Maximum control |
+
+> ⚠️ **Важливо для іспиту**: CMEK використовує Cloud KMS, CSEK - ви надаєте власні keys. Google-managed encryption - default для всіх дисків.
+
+---
+
+## Regional Persistent Disks
+
+**Опис:** Persistent disks реплікуються синхронно між 2 зонами в одному регіоні.
+
+### Характеристики
+
+**High Availability:**
+
+- Synchronous replication між 2 зонами
+- Automatic failover при zone failure
+- 99.99% SLA (vs 99.9% для zonal)
+- RPO = 0 (no data loss)
+
+**Performance:**
+
+- Трохи вища latency (cross-zone replication)
+- Така ж IOPS та throughput як zonal
+- Підтримка pd-balanced та pd-ssd (не pd-extreme)
+
+**Pricing:**
+
+- 2x cost порівняно з zonal PD
+- Justified для critical workloads
+
+### Створення Regional PD
+
+```bash
+# Створити regional persistent disk
+gcloud compute disks create my-regional-disk \
+  --size=100GB \
+  --type=pd-balanced \
+  --region=us-central1 \
+  --replica-zones=us-central1-a,us-central1-b
+
+# Створити VM з regional PD
+gcloud compute instances create my-vm \
+  --zone=us-central1-a \
+  --disk=name=my-regional-disk,boot=yes \
+  --region=us-central1
+```
+
+### Force-attach для Failover
+
+При zone failure можна force-attach regional disk до VM в іншій зоні:
+
+```bash
+# VM в zone-a failed, attach до VM в zone-b
+gcloud compute instances attach-disk my-vm-zone-b \
+  --disk=my-regional-disk \
+  --force-attach \
+  --zone=us-central1-b
+```
+
+**Коли використовувати:**
+
+- ✅ Критичні databases (MySQL, PostgreSQL)
+- ✅ Stateful applications
+- ✅ Compliance requirements (99.99% SLA)
+- ❌ Cost-sensitive workloads
+- ❌ Temporary data
+
+---
+
+## Практичний Сценарій: Multi-tier Application Storage Strategy
+
+### Архітектура
+
+Розглянемо e-commerce платформу з різними storage requirements:
+
+```mermaid
+graph TB
+    subgraph "Frontend Tier"
+        WEB[Web Servers<br/>e2-medium<br/>pd-balanced 50GB]
+    end
+    
+    subgraph "Application Tier"
+        APP[App Servers<br/>n2-standard-4<br/>pd-balanced 100GB]
+        CACHE[Redis Cache<br/>n2-highmem-2<br/>Local SSD 375GB]
+    end
+    
+    subgraph "Database Tier"
+        DB[(MySQL Primary<br/>n2-highmem-8<br/>Regional pd-ssd 500GB)]
+        SNAP[Daily Snapshots<br/>7-day retention]
+    end
+    
+    subgraph "Storage Tier"
+        MEDIA[User Uploads<br/>Cloud Storage]
+        BACKUP[DB Backups<br/>Snapshots]
+    end
+    
+    WEB --> APP
+    APP --> CACHE
+    APP --> DB
+    DB --> SNAP
+    APP --> MEDIA
+    DB --> BACKUP
+    
+    style WEB fill:#4285f4,color:#fff
+    style APP fill:#34a853,color:#fff
+    style CACHE fill:#fbbc04
+    style DB fill:#ea4335,color:#fff
+```
+
+### Storage Strategy по Tier
+
+#### 1. Web Servers (Frontend)
+
+**Requirements:**
+
+- Stateless (можна recreate)
+- Низький IOPS
+- Cost-sensitive
+
+**Solution:**
+
+```bash
+# pd-balanced 50GB (достатньо для OS + application code)
+gcloud compute instances create web-server-1 \
+  --machine-type=e2-medium \
+  --boot-disk-size=50GB \
+  --boot-disk-type=pd-balanced \
+  --zone=us-central1-a
+```
+
+**Reasoning:**
+
+- pd-balanced: 50GB × 6 IOPS/GB = 300 IOPS (достатньо)
+- Cost: ~$5/month
+- Custom image з pre-installed software для швидкого deployment
+
+---
+
+#### 2. Application Servers
+
+**Requirements:**
+
+- Moderate IOPS
+- Application logs
+- Session storage
+
+**Solution:**
+
+```bash
+# pd-balanced 100GB для app + logs
+gcloud compute instances create app-server-1 \
+  --machine-type=n2-standard-4 \
+  --boot-disk-size=100GB \
+  --boot-disk-type=pd-balanced \
+  --zone=us-central1-a
+```
+
+**Reasoning:**
+
+- 100GB × 6 IOPS/GB = 600 IOPS
+- Cost: ~$10/month
+- Достатньо для application workload
+
+---
+
+#### 3. Redis Cache
+
+**Requirements:**
+
+- Найвища performance
+- Ephemeral data (можна recreate)
+- Low latency
+
+**Solution:**
+
+```bash
+# Local SSD для cache
+gcloud compute instances create redis-cache \
+  --machine-type=n2-highmem-2 \
+  --local-ssd=interface=NVME \
+  --zone=us-central1-a
+```
+
+**Reasoning:**
+
+- Local SSD: 375 GB, 680,000 IOPS
+- Ephemeral nature OK (cache можна rebuild)
+- Найнижча latency
+
+---
+
+#### 4. MySQL Database (Critical)
+
+**Requirements:**
+
+- High availability (99.99% SLA)
+- High IOPS
+- Zero data loss (RPO = 0)
+- Daily backups
+
+**Solution:**
+
+```bash
+# Regional pd-ssd для HA
+gcloud compute disks create mysql-data \
+  --size=500GB \
+  --type=pd-ssd \
+  --region=us-central1 \
+  --replica-zones=us-central1-a,us-central1-b
+
+gcloud compute instances create mysql-primary \
+  --machine-type=n2-highmem-8 \
+  --disk=name=mysql-data,boot=no \
+  --zone=us-central1-a
+
+# Snapshot schedule
+gcloud compute resource-policies create snapshot-schedule mysql-daily \
+  --max-retention-days=7 \
+  --start-time=02:00 \
+  --daily-schedule \
+  --region=us-central1
+
+gcloud compute disks add-resource-policies mysql-data \
+  --resource-policies=mysql-daily \
+  --region=us-central1
+```
+
+**Reasoning:**
+
+- Regional pd-ssd: 500GB × 30 IOPS/GB = 15,000 IOPS
+- Synchronous replication між зонами (RPO = 0)
+- Daily snapshots для point-in-time recovery
+- Cost: ~$170/month (justified для critical data)
+
+---
+
+### Cost Analysis
+
+| Component | Disk Type | Size | Monthly Cost | IOPS |
+|-----------|-----------|------|--------------|------|
+| Web Servers (×3) | pd-balanced | 50GB | $15 | 900 |
+| App Servers (×2) | pd-balanced | 100GB | $20 | 1,200 |
+| Redis Cache | Local SSD | 375GB | $0 (included) | 680,000 |
+| MySQL Primary | Regional pd-ssd | 500GB | $170 | 15,000 |
+| **Total** | | **1,325GB** | **$205/month** | |
+
+### Key Takeaways
+
+**1. Match Storage to Workload:**
+
+- Stateless workloads → pd-balanced
+- Cache → Local SSD
+- Critical databases → Regional pd-ssd
+
+**2. High Availability Strategy:**
+
+- Regional PD для databases (zero RPO)
+- Snapshots для point-in-time recovery
+- Force-attach для failover
+
+**3. Cost Optimization:**
+
+- Не використовуйте regional PD для всього
+- Local SSD для ephemeral data
+- pd-balanced як default
+
+**4. Backup Strategy:**
+
+- Daily snapshots з 7-day retention
+- Cross-region snapshots для DR
+- Application-consistent snapshots для databases
 
 ---
 
