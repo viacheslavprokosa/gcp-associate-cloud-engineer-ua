@@ -129,37 +129,36 @@ certification exam.
 Each module page MUST contain:
 
 1) **Module goal** (2–3 sentences in Ukrainian)
-1) **Module goal** (2–3 sentences in English)
-1) **List of subtopics** with links to detailed pages
-1) **Key exam takeaways** (bullet points, English)
-1) **Mermaid diagram** (where applicable) - architecture, flow, hierarchy
-1) **At the bottom:** mandatory link to `exam-questions.md`
+2) **List of subtopics** with links to detailed pages
+3) **Key exam takeaways** (bullet points, Ukrainian)
+4) **Mermaid diagram** (where applicable) - architecture, flow, hierarchy
+5) **At the bottom:** mandatory link to `exam-questions.md`
 
 Example structure:
 
 ```markdown
 # [Module Name]
 
-## Module Goal
-[2-3 sentences about what you'll learn - in Ukrainian]
+## Мета модуля
+[2-3 sentences about what you'll learn]
 
-## Topics
+## Теми
 
 - [Topic 1](topic1.md)
 - [Topic 2](topic2.md)
 
-## Key Exam Takeaways
+## Ключові моменти для іспиту
 
 - ✅ Point 1
 - ✅ Point 2
 
-## Diagram
+## Діаграма
 
 ```mermaid
 [diagram here]
 ```
 
-## 📝 [Practice Questions](exam-questions.md)
+## 📝 [Практичні питання](exam-questions.md)
 
 ```
 
@@ -171,9 +170,9 @@ Format of exam-questions.md:
 - Typical Associate Cloud Engineer exam questions (IN ENGLISH)
 - Multiple choice format (A, B, C, D)
 - After each question:
-  - **Correct Answer:** [Letter] (use Ukrainian label)
-  - **Explanation:** Why the correct answer is correct (in Ukrainian, use appropriate label)
-  - **Why other options are wrong:** (in Ukrainian, use appropriate label)
+  - **Правильна відповідь:** [Letter]
+  - **Пояснення:** Why the correct answer is correct (Ukrainian)
+  - **Чому інші варіанти неправильні:** (Ukrainian)
 - No invented questions — only realistic ACE-style scenarios
 - Focus on practical scenarios, not just theory
 
@@ -189,14 +188,14 @@ B) Google Kubernetes Engine with Horizontal Pod Autoscaler
 C) App Engine Standard
 D) Cloud Functions
 
-**Correct Answer:** B
+**Правильна відповідь:** B
 
-**Explanation:** [Explanation in Ukrainian why GKE with HPA is correct...]
+**Пояснення:** GKE з HPA автоматично масштабує контейнеризовані додатки...
 
-**Why other options are wrong:**
-- A: [Explanation in Ukrainian]
-- C: [Explanation in Ukrainian]
-- D: [Explanation in Ukrainian]
+**Чому інші варіанти неправильні:**
+- A: Потребує ручного управління
+- C: Підходить, але GKE краще для контейнерів
+- D: Для окремих функцій, не для повних додатків
 ```
 
 ────────────────────────
@@ -231,11 +230,9 @@ Use tables:
 | Cost    | Low      | High     |
 
 **Important notes:**
-Highlight critical information for the exam:
-> ⚠️ **Important for exam:** [Critical information - content in Ukrainian]
+> ⚠️ **Важливо для іспиту:** This is critical information
 
 **Best practices:**
-List recommended actions:
 
 - ✅ Do this
 - ❌ Don't do this
@@ -256,6 +253,28 @@ Format:
 ```markdown
 ## A
 
-**ACL (Access Control List)** / [Ukrainian translation]
-[Brief definition in Ukrainian]. [→ IAM](10-iam-security/README.md)
+**ACL (Access Control List)** / Список контролю доступу
+Механізм для управління доступом до ресурсів. [→ IAM](10-iam-security/README.md)
 ```
+
+────────────────────────
+9. ROADMAP WORKFLOW
+────────────────────────
+
+CRITICAL: Before starting ANY work session:
+
+1. Read .agent/roadmap.md to understand current progress and priorities
+2. Check "Current Focus" and "Next Steps" sections
+3. Align your work with the roadmap priorities
+
+CRITICAL: Before EVERY commit:
+
+1. Update .agent/roadmap.md with:
+   - Mark completed items as ✅
+   - Update "Last Updated" date
+   - Add new completed work to "Completed Work" section
+   - Update progress metrics
+   - Add notes about what was done
+2. Commit roadmap.md changes together with your work
+
+The roadmap is the single source of truth for project progress and planning.
