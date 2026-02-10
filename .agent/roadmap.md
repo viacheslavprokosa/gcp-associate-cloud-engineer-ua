@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 10:52
+**Last Updated:** 2026-02-10 13:14
 
 ---
 
@@ -114,6 +114,18 @@
   - Cloud Spanner vs Cloud SQL comparison
   - Cross-references to Modules 03, 04, 05, 09, 10
 
+- ✅ **firestore.md** (12 → 762+ lines)
+  - Added Firestore fundamentals and NoSQL data model
+  - Collections, documents, and subcollections hierarchy
+  - Native mode vs Datastore mode comparison
+  - Queries, indexes, and pagination
+  - Real-time listeners and offline support
+  - Transactions and batch writes
+  - Firebase Security Rules with validation
+  - Real-time chat application practical scenario
+  - Firestore vs Realtime Database comparison
+  - Cross-references to Modules 03, 04, 05, 06, 10
+
 ---
 
 ## 🔄 Current Focus
@@ -142,7 +154,7 @@
 2. **Expand database files:**
    - [x] cloud-sql.md - Add HA, replication, backup theory ✅
    - [x] cloud-spanner.md - Global database, consistency ✅
-   - [ ] firestore.md - NoSQL document database
+   - [x] firestore.md - NoSQL document database ✅
    - [ ] bigtable.md - Wide-column NoSQL
 
 3. **Expand IAM files:**
@@ -184,11 +196,11 @@
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
-| 08 | 2/4 | ~1,530 | 🟡 In Progress |
+| 08 | 3/4 | ~2,290 | 🟡 In Progress |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
 | 04-07, 10-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~45% of deep theory expansion completed
+**Total Progress:** ~48% of deep theory expansion completed
 
 ---
 
