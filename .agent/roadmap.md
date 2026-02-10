@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 17:30
+**Last Updated:** 2026-02-10 18:00
 
 ---
 
@@ -284,7 +284,16 @@
   - Practical scenario: multi-tier application storage strategy
   - Cross-references to related modules
 
-- [ ] **instance-groups.md** - Needs expansion
+- ✅ **instance-groups.md** (306 → 1280+ lines)
+  - Instance groups fundamentals and ecosystem
+  - Detailed autoscaling theory (CPU, LB, custom metrics, Pub/Sub)
+  - Multiple metrics scaling and scale-in controls
+  - Comprehensive health checks (HTTP, HTTPS, TCP, SSL)
+  - Autohealing process and configuration strategy
+  - Rolling updates (proactive, opportunistic, canary)
+  - Update parameters (max-surge, max-unavailable, min-ready-sec)
+  - Practical scenario: web application with auto-scaling
+  - Cross-references to related modules
 
 ---
 
@@ -356,7 +365,7 @@
 |--------|----------------|-------------------|--------|
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
-| 03 | 2/4 | ~1,800 | 🟡 In Progress |
+| 03 | 3/4 | ~3,100 | ✅ **COMPLETED** |
 | 04 | 3/3 | ~2,100 | ✅ **COMPLETED** |
 | 05 | 2/2 | ~1,250 | ✅ **COMPLETED** |
 | 06 | 2/2 | ~1,250 | ✅ **COMPLETED** |
