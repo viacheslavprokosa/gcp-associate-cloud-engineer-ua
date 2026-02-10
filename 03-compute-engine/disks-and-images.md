@@ -1,52 +1,261 @@
 # Disks and Images
 
+## Що таке Persistent Disks?
+
+**Persistent Disk (PD)** - це durable block storage для Compute Engine VM instances. На відміну від ephemeral local storage, persistent disks зберігають дані незалежно від VM lifecycle.
+
+### Основні характеристики
+
+**Block Storage**
+
+- Дані зберігаються у blocks (зазвичай 4 KB)
+- Можна форматувати з будь-якою файловою системою (ext4, NTFS, XFS)
+- Підключається до VM як звичайний диск (/dev/sdb)
+
+**Network-Attached Storage**
+
+- Фізично відокремлені від VM host
+- Підключаються через мережу (але виглядають як local disk)
+- Можна відключити та приєднати до іншої VM
+- Автоматична реплікація для durability
+
+**Durability та Availability**
+
+- **Zonal PD**: Реплікується в 2+ locations в одній зоні
+- **Regional PD**: Реплікується синхронно в 2 зонах
+- 99.999% durability (zonal), 99.9999% (regional)
+- Automatic checksums та repair
+
+### Як працює Persistent Disk?
+
+```mermaid
+graph TB
+    subgraph "Zone A"
+        VM1[VM Instance]
+        PD1[Persistent Disk<br/>Primary]
+        PD2[Persistent Disk<br/>Replica 1]
+        PD3[Persistent Disk<br/>Replica 2]
+        
+        VM1 -->|Network| PD1
+        PD1 -.->|Replication| PD2
+        PD1 -.->|Replication| PD3
+    end
+    
+    subgraph "Zone B - Regional PD"
+        PD4[Persistent Disk<br/>Replica 3]
+    end
+    
+    PD1 -.->|Sync Replication| PD4
+    
+    style VM1 fill:#4285f4,color:#fff
+    style PD1 fill:#34a853,color:#fff
+    style PD2 fill:#fbbc04
+    style PD3 fill:#fbbc04
+    style PD4 fill:#ea4335,color:#fff
+```
+
+**Replication Process:**
+
+1. VM пише дані на persistent disk
+2. Дані передаються через мережу до primary replica
+3. Primary replica синхронно реплікує на інші replicas
+4. Write acknowledged тільки після successful replication
+
+---
+
 ## Persistent Disks
 
 ### Типи дисків
 
-| Type | Performance | Use Case | Price |
-|------|-------------|----------|-------|
-| **Standard PD** (HDD) | 0.75-1.2 MB/s per GB | Sequential I/O, throughput | $ |
-| **Balanced PD** (SSD) | 6 IOPS per GB | General purpose (recommended) | $$ |
-| **SSD PD** | 30 IOPS per GB | Low-latency, transactional | $$$ |
-| **Extreme PD** | 120 IOPS per GB | Highest performance | $$$$ |
+Google Cloud пропонує 4 типи persistent disks з різною performance та ціною.
 
-### Характеристики
+#### Standard PD (pd-standard) - HDD
 
-- Незалежні від VM lifecycle
-- Автоматична реплікація в зоні
-- Можна змінювати розмір без downtime
-- До 64 TB на диск
-- До 128 дисків на VM
+**Характеристики:**
 
-### Zonal vs Regional PD
+- **Тип**: Hard Disk Drive (HDD)
+- **Performance**: 0.75 MB/s per GB read, 1.5 MB/s per GB write
+- **IOPS**: 0.75 read IOPS per GB, 1.5 write IOPS per GB
+- **Max throughput**: 1,200 MB/s read, 400 MB/s write (per VM)
+- **Max IOPS**: 7,500 read, 15,000 write (per VM)
+- **Ціна**: Найнижча (~$0.04/GB/month)
 
-- **Zonal**: Реплікується в одній зоні (стандарт)
-- **Regional**: Реплікується в двох зонах (HA, дорожче)
+**Коли використовувати:**
 
-### Створення та приєднання
+- ✅ Sequential I/O workloads (backups, logs)
+- ✅ Throughput-oriented applications
+- ✅ Cold storage
+- ✅ Cost-sensitive workloads
+- ❌ Random I/O workloads
+- ❌ Transactional databases
+
+**Приклад:**
 
 ```bash
-# Створити диск
-gcloud compute disks create my-disk \
+gcloud compute disks create backup-disk \
+  --size=500GB \
+  --type=pd-standard \
+  --zone=us-central1-a
+```
+
+---
+
+#### Balanced PD (pd-balanced) - SSD
+
+**Характеристики:**
+
+- **Тип**: Solid State Drive (SSD)
+- **Performance**: 6 IOPS per GB (read/write)
+- **Throughput**: 0.28 MB/s per GB
+- **Max throughput**: 1,200 MB/s (per VM)
+- **Max IOPS**: 80,000 (per VM)
+- **Ціна**: Середня (~$0.10/GB/month)
+
+**Коли використовувати:**
+
+- ✅ **Recommended default** для більшості workloads
+- ✅ General-purpose applications
+- ✅ MySQL, PostgreSQL databases
+- ✅ Web servers
+- ✅ Development environments
+- ✅ Balance між cost та performance
+
+**Приклад:**
+
+```bash
+gcloud compute disks create app-disk \
   --size=100GB \
   --type=pd-balanced \
   --zone=us-central1-a
+```
 
-# Приєднати до VM
-gcloud compute instances attach-disk my-vm \
-  --disk=my-disk \
-  --zone=us-central1-a
+**Performance Calculation:**
 
-# Відключити диск
-gcloud compute instances detach-disk my-vm \
-  --disk=my-disk \
-  --zone=us-central1-a
+```
+100 GB pd-balanced:
+- IOPS: 100 GB × 6 IOPS/GB = 600 IOPS
+- Throughput: 100 GB × 0.28 MB/s/GB = 28 MB/s
+```
 
-# Змінити розмір
-gcloud compute disks resize my-disk \
-  --size=200GB \
+---
+
+#### SSD PD (pd-ssd)
+
+**Характеристики:**
+
+- **Тип**: High-performance SSD
+- **Performance**: 30 IOPS per GB (read/write)
+- **Throughput**: 0.48 MB/s per GB
+- **Max throughput**: 1,200 MB/s (per VM)
+- **Max IOPS**: 100,000 (per VM)
+- **Ціна**: Висока (~$0.17/GB/month)
+
+**Коли використовувати:**
+
+- ✅ Low-latency workloads
+- ✅ Transactional databases (OLTP)
+- ✅ High-performance applications
+- ✅ Random I/O workloads
+- ❌ Cost-sensitive workloads (краще pd-balanced)
+
+**Приклад:**
+
+```bash
+gcloud compute disks create db-disk \
+  --size=100GB \
+  --type=pd-ssd \
   --zone=us-central1-a
+```
+
+**Performance Calculation:**
+
+```
+100 GB pd-ssd:
+- IOPS: 100 GB × 30 IOPS/GB = 3,000 IOPS
+- Throughput: 100 GB × 0.48 MB/s/GB = 48 MB/s
+```
+
+---
+
+#### Extreme PD (pd-extreme)
+
+**Характеристики:**
+
+- **Тип**: Ultra-high-performance SSD
+- **Performance**: Configurable (до 120,000 IOPS)
+- **IOPS**: Provisioned IOPS (незалежно від розміру)
+- **Throughput**: До 4,800 MB/s
+- **Size**: 500 GB - 64 TB
+- **Ціна**: Найвища (~$0.125/GB/month + $0.65/IOPS/month)
+
+**Коли використовувати:**
+
+- ✅ Extreme performance requirements
+- ✅ SAP HANA
+- ✅ Oracle databases
+- ✅ SQL Server
+- ✅ Коли потрібно >100,000 IOPS
+- ❌ General workloads (занадто дорого)
+
+**Приклад:**
+
+```bash
+gcloud compute disks create extreme-disk \
+  --size=1000GB \
+  --type=pd-extreme \
+  --provisioned-iops=100000 \
+  --zone=us-central1-a
+```
+
+---
+
+### Порівняльна таблиця
+
+| Type | Technology | IOPS/GB | Max IOPS | Max Throughput | Price | Use Case |
+|------|------------|---------|----------|----------------|-------|----------|
+| **Standard PD** | HDD | 0.75-1.5 | 15,000 | 1,200 MB/s | $ | Sequential I/O |
+| **Balanced PD** | SSD | 6 | 80,000 | 1,200 MB/s | $$ | **General purpose** |
+| **SSD PD** | SSD | 30 | 100,000 | 1,200 MB/s | $$$ | Low latency |
+| **Extreme PD** | SSD | Provisioned | 120,000 | 4,800 MB/s | $$$$ | Extreme performance |
+
+> ⚠️ **Важливо для іспиту**: pd-balanced - це **recommended default** для більшості workloads. Розумійте різницю між IOPS та throughput.
+
+---
+
+### Performance Factors
+
+**1. Disk Size**
+
+- Більший диск = більше IOPS та throughput
+- Performance scales linearly з розміром (до VM limits)
+
+**2. VM Machine Type**
+
+- Більший VM = вищі performance limits
+- Shared-core VMs мають нижчі limits
+
+**3. Number of Disks**
+
+- Можна приєднати до 128 disks на VM
+- Performance aggregates across disks
+
+**4. Read vs Write**
+
+- Standard PD: Write швидше за read
+- SSD/Balanced: Read та write однакові
+
+**Performance Limits Example:**
+
+```
+e2-standard-2 VM з 100 GB pd-balanced:
+- Disk capability: 600 IOPS, 28 MB/s
+- VM limit: 15,000 IOPS, 240 MB/s
+- Actual: 600 IOPS, 28 MB/s (disk-limited)
+
+n2-standard-32 VM з 100 GB pd-balanced:
+- Disk capability: 600 IOPS, 28 MB/s
+- VM limit: 100,000 IOPS, 2,400 MB/s
+- Actual: 600 IOPS, 28 MB/s (disk-limited)
 ```
 
 ---
