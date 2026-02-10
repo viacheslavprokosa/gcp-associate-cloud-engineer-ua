@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10
+**Last Updated:** 2026-02-10 10:41
 
 ---
 
@@ -45,6 +45,18 @@
   - Added cross-references to Modules 03, 04, 07, 08, 12
   - Explained storage types with analogies
 
+#### Module 09: Networking
+
+- ✅ **vpc.md** (15 → 780+ lines)
+  - Added comprehensive VPC fundamentals (global vs regional)
+  - Explained auto mode vs custom mode VPC
+  - Deep dive into subnets, CIDR, IP ranges
+  - Routing theory (system-generated and custom routes)
+  - Firewall rules with practical examples
+  - VPC Peering, Shared VPC, Private Google Access
+  - 3-tier web application practical scenario
+  - Cross-references to Modules 01, 03, 04, 07, 10
+
 ---
 
 ## 🔄 Current Focus
@@ -65,7 +77,7 @@
 ### Immediate (This Session)
 
 1. **Expand networking files:**
-   - [ ] vpc.md - Add VPC fundamentals, subnets, routing
+   - [x] vpc.md - Add VPC fundamentals, subnets, routing ✅
    - [ ] load-balancing.md - LB types, decision tree
    - [ ] Add cross-references to Modules 03, 04
 
@@ -112,9 +124,10 @@
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
-| 04-13 | 0 | 0 | ⚪ Not Started |
+| 09 | 1/4 | ~765 | 🟡 In Progress |
+| 04-08, 10-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~15% of deep theory expansion completed
+**Total Progress:** ~25% of deep theory expansion completed
 
 ---
 
