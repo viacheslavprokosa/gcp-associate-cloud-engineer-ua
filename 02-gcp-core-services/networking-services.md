@@ -279,7 +279,7 @@ gcloud compute vpn-tunnels create my-tunnel \
 | **Bandwidth** | До 3 Gbps/tunnel | 10/100 Gbps | 50 Mbps - 50 Gbps |
 | **Latency** | Internet | Lowest | Low |
 | **SLA** | 99.99% (HA VPN) | 99.99% | 99.9% - 99.99% |
-| **Ціна** | \$ | \$\$\$ | \$\$ |
+| **Ціна** | $ | $$$ | $$ |
 | **Setup** | Швидко | Повільно | Середньо |
 
 ### Коли використовувати Interconnect

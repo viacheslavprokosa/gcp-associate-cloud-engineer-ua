@@ -245,7 +245,7 @@ gcloud redis instances create my-redis \
 | **Max Size** | ~30 TB | Petabytes | Terabytes | Petabytes | 300 GB |
 | **Latency** | ms | ms | ms | ms | sub-ms |
 | **Use Case** | OLTP | Global apps | Mobile/Web | Analytics | Caching |
-| **Ціна** | \$ | \$\$\$ | \$ | \$\$ | \$ |
+| **Ціна** | $ | $$$ | $ | $$ | $ |
 
 ---
 
