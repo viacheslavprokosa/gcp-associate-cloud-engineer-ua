@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 13:17
+**Last Updated:** 2026-02-10 15:22
 
 ---
 
@@ -136,6 +136,17 @@
   - Bigtable vs Cloud Spanner vs Firestore comparison
   - Cross-references to Modules 03, 04, 09, 10, 11
 
+- ✅ **iam-basics.md** (16 → 767+ lines)
+  - Added IAM fundamentals and access control concepts
+  - Resource hierarchy (Organization, Folder, Project, Resource)
+  - Policy structure and inheritance
+  - Members types (user, serviceAccount, group, domain, allUsers)
+  - Roles (Basic, Predefined, Custom)
+  - Permissions format and categories
+  - Conditional access with CEL expressions
+  - Multi-environment setup practical scenario
+  - Cross-references to Modules 03, 04, 07, 08, 09
+
 ---
 
 ## 🔄 Current Focus
@@ -168,9 +179,10 @@
    - [x] bigtable.md - Wide-column NoSQL ✅
 
 3. **Expand IAM files:**
-   - [ ] iam-basics.md - Add IAM hierarchy, policy evaluation
+   - [x] iam-basics.md - Add IAM hierarchy, policy evaluation ✅
    - [ ] service-accounts.md - Add practical examples
-   - [ ] Add cross-references to all modules
+   - [ ] roles-and-permissions.md - Custom roles
+   - [ ] best-practices.md - Security best practices
 
 ### Short-term (Next Sessions)
 
@@ -208,9 +220,10 @@
 | 03 | 1/4 | ~370 | 🟡 In Progress |
 | 08 | 4/4 | ~3,070 | ✅ **COMPLETED** |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
-| 04-07, 10-13 | 0 | 0 | ⚪ Not Started |
+| 10 | 1/4 | ~750 | 🟡 In Progress |
+| 04-07, 11-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~51% of deep theory expansion completed
+**Total Progress:** ~52% of deep theory expansion completed
 
 ---
 
