@@ -81,6 +81,7 @@ jobs:
                   .github/scripts/build-pdf.sh
               env:
                   PUPPETEER_ARGS: "--no-sandbox --disable-setuid-sandbox"
+                  MERMAID_FILTER_PUPPETEER_CONFIG: .github/scripts/mermaid-config.json
 
             - name: Commit and Push PDF
               run: |
