@@ -50,8 +50,10 @@ for i in {01..13}; do
             add_file "$file"
         done
         
-        # Add exam-questions.md last for each module
-        add_file "$dir/exam-questions.md"
+        # Add exam-questions.md last for each module (except module 13)
+        if [ "$i" != "13" ]; then
+            add_file "$dir/exam-questions.md"
+        fi
     fi
 done
 
