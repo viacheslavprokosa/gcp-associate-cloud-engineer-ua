@@ -79,6 +79,8 @@ jobs:
               run: |
                   chmod +x .github/scripts/build-pdf.sh
                   .github/scripts/build-pdf.sh
+              env:
+                  PUPPETEER_ARGS: "--no-sandbox --disable-setuid-sandbox"
 
             - name: Commit and Push PDF
               run: |
