@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 16:40
+**Last Updated:** 2026-02-10 17:05
 
 ---
 
@@ -261,6 +261,26 @@
   - Image processing practical scenario
   - Cross-references to Modules 05, 06, 12
 
+### Module 03 - Compute Engine (In Progress)
+
+- ✅ **machine-types.md** (197 → 690+ lines)
+  - Added CPU/memory architecture fundamentals
+  - Expanded all series (E2, N2, N2D, N1, C2, C2D, M1, M2, M3)
+  - Added Accelerator-Optimized (A2, G2) with GPU details
+  - Added pricing models (on-demand, preemptible, spot, CUD, SUD)
+  - Added sole-tenant nodes section
+  - Cost optimization practical scenario
+  - Cross-references to Modules 07, 09, 10, 12
+
+- 🔄 **disks-and-images.md** (258 → 400+ lines, in progress)
+  - Added persistent disk fundamentals
+  - Expanded disk types (Standard, Balanced, SSD, Extreme PD)
+  - Added IOPS/throughput performance theory
+  - Performance factors and calculations
+  - TODO: Encryption, snapshots strategy, practical scenario
+
+- [ ] **instance-groups.md** - Needs expansion
+
 ---
 
 ## 🔄 Current Focus
@@ -331,7 +351,7 @@
 |--------|----------------|-------------------|--------|
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
-| 03 | 1/4 | ~370 | 🟡 In Progress |
+| 03 | 2/4 | ~900 | 🟡 In Progress |
 | 04 | 3/3 | ~2,100 | ✅ **COMPLETED** |
 | 05 | 2/2 | ~1,250 | ✅ **COMPLETED** |
 | 06 | 2/2 | ~1,250 | ✅ **COMPLETED** |
