@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 13:14
+**Last Updated:** 2026-02-10 13:17
 
 ---
 
@@ -126,6 +126,16 @@
   - Firestore vs Realtime Database comparison
   - Cross-references to Modules 03, 04, 05, 06, 10
 
+- ✅ **bigtable.md** (12 → 777+ lines)
+  - Added Bigtable fundamentals and wide-column NoSQL model
+  - Data model: row keys, column families, qualifiers, timestamps
+  - Schema design best practices and row key patterns
+  - Replication (single-cluster, multi-cluster)
+  - Performance optimization and scaling strategies
+  - IoT sensor platform practical scenario
+  - Bigtable vs Cloud Spanner vs Firestore comparison
+  - Cross-references to Modules 03, 04, 09, 10, 11
+
 ---
 
 ## 🔄 Current Focus
@@ -151,11 +161,11 @@
    - [x] cloud-dns.md - DNS zones, records, DNSSEC ✅
    - [x] vpn-interconnect.md - Cloud VPN, Interconnect options ✅
 
-2. **Expand database files:**
+2. **Expand database files:** ✅ **COMPLETED**
    - [x] cloud-sql.md - Add HA, replication, backup theory ✅
    - [x] cloud-spanner.md - Global database, consistency ✅
    - [x] firestore.md - NoSQL document database ✅
-   - [ ] bigtable.md - Wide-column NoSQL
+   - [x] bigtable.md - Wide-column NoSQL ✅
 
 3. **Expand IAM files:**
    - [ ] iam-basics.md - Add IAM hierarchy, policy evaluation
@@ -196,11 +206,11 @@
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
-| 08 | 3/4 | ~2,290 | 🟡 In Progress |
+| 08 | 4/4 | ~3,070 | ✅ **COMPLETED** |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
 | 04-07, 10-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~48% of deep theory expansion completed
+**Total Progress:** ~51% of deep theory expansion completed
 
 ---
 
