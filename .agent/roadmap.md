@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 15:28
+**Last Updated:** 2026-02-10 15:32
 
 ---
 
@@ -157,6 +157,25 @@
   - Multi-tier application practical scenario
   - Cross-references to Modules 03, 04, 06, 07, 08
 
+- ✅ **roles-and-permissions.md** (10 → 639+ lines)
+  - Added roles and permissions fundamentals
+  - Role types (Basic, Predefined, Custom)
+  - Custom roles creation and management
+  - Permission format and categories
+  - Testing permissions and troubleshooting
+  - DevOps team roles practical scenario
+  - Cross-references to Modules 03, 07, 08, 10
+
+- ✅ **best-practices.md** (9 → 611+ lines)
+  - Added security best practices fundamentals
+  - IAM best practices (least privilege, groups, MFA)
+  - Network security (VPC firewall, private IPs, Cloud Armor)
+  - Data protection (encryption, CMEK, DLP)
+  - Monitoring and logging best practices
+  - Compliance (GDPR, data residency, certifications)
+  - Secure production environment practical scenario
+  - Cross-references to Modules 09, 10, 11
+
 ---
 
 ## 🔄 Current Focus
@@ -191,8 +210,8 @@
 3. **Expand IAM files:**
    - [x] iam-basics.md - Add IAM hierarchy, policy evaluation ✅
    - [x] service-accounts.md - Add practical examples ✅
-   - [ ] roles-and-permissions.md - Custom roles
-   - [ ] best-practices.md - Security best practices
+   - [x] roles-and-permissions.md - Custom roles ✅
+   - [x] best-practices.md - Security best practices ✅
 
 ### Short-term (Next Sessions)
 
@@ -230,10 +249,10 @@
 | 03 | 1/4 | ~370 | 🟡 In Progress |
 | 08 | 4/4 | ~3,070 | ✅ **COMPLETED** |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
-| 10 | 2/4 | ~1,410 | 🟡 In Progress |
+| 10 | 4/4 | ~2,660 | ✅ **COMPLETED** |
 | 04-07, 11-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~54% of deep theory expansion completed
+**Total Progress:** ~56% of deep theory expansion completed
 
 ---
 
