@@ -23,6 +23,27 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: "20"
+                  cache: "npm"
+
+            # Cache APT packages
+            - name: Cache APT packages
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      /var/cache/apt/archives
+                      /var/lib/apt/lists
+                  key: ${{ runner.os }}-apt-${{ hashFiles('.github/workflows/generate-pdf.yml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-apt-
+
+            # Cache npm global packages
+            - name: Cache npm global packages
+              uses: actions/cache@v4
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-npm-global-${{ hashFiles('.github/workflows/generate-pdf.yml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-npm-global-
 
             - name: Install Pandoc
               run: |
