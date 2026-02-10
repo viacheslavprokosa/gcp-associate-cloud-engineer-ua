@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 17:05
+**Last Updated:** 2026-02-10 17:30
 
 ---
 
@@ -272,12 +272,17 @@
   - Cost optimization practical scenario
   - Cross-references to Modules 07, 09, 10, 12
 
-- 🔄 **disks-and-images.md** (258 → 400+ lines, in progress)
-  - Added persistent disk fundamentals
+- ✅ **disks-and-images.md** (258 → 1100+ lines)
+  - Added persistent disk fundamentals and architecture
   - Expanded disk types (Standard, Balanced, SSD, Extreme PD)
   - Added IOPS/throughput performance theory
   - Performance factors and calculations
-  - TODO: Encryption, snapshots strategy, practical scenario
+  - Snapshots with incremental backup theory and chains
+  - Images (public, custom, machine images, families)
+  - Disk encryption (Google-managed, CMEK, CSEK)
+  - Regional persistent disks for HA
+  - Practical scenario: multi-tier application storage strategy
+  - Cross-references to related modules
 
 - [ ] **instance-groups.md** - Needs expansion
 
@@ -351,7 +356,7 @@
 |--------|----------------|-------------------|--------|
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
-| 03 | 2/4 | ~900 | 🟡 In Progress |
+| 03 | 2/4 | ~1,800 | 🟡 In Progress |
 | 04 | 3/3 | ~2,100 | ✅ **COMPLETED** |
 | 05 | 2/2 | ~1,250 | ✅ **COMPLETED** |
 | 06 | 2/2 | ~1,250 | ✅ **COMPLETED** |
