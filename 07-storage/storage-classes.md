@@ -9,7 +9,7 @@
 Cloud Storage має 4 storage classes, оптимізовані для різних patterns доступу:
 
 | Class | Use Case | Min Duration | Cost/GB/month | Retrieval Cost |
-|-------|----------|--------------|---------------|----------------|
+| --- | --- | --- | --- | --- |
 | **Standard** | Frequent access | None | $0.020 | None |
 | **Nearline** | < 1/month | 30 days | $0.010 | $0.01/GB |
 | **Coldline** | < 1/quarter | 90 days | $0.004 | $0.02/GB |

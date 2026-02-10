@@ -217,7 +217,7 @@ gcloud compute instance-groups managed set-autoscaling my-mig \
 
 **Calculation Example:**
 
-```
+```text
 Current: 4 instances, average CPU = 80%
 Target: 60% CPU
 Recommended instances = 4 × (0.80 / 0.60) = 5.33 → 6 instances
@@ -890,7 +890,7 @@ gcloud compute instance-groups managed rolling-action start-update my-mig \
 
 **Example:**
 
-```
+```text
 Target size: 10 instances
 max-surge: 3
 max-unavailable: 0
@@ -934,7 +934,7 @@ gcloud compute instance-groups managed rolling-action start-update my-mig \
 
 **Example:**
 
-```
+```text
 Target size: 10 instances
 max-surge: 0
 max-unavailable: 2
@@ -1024,7 +1024,7 @@ gcloud compute instance-groups managed rolling-action start-update my-mig \
 
 **Calculation:**
 
-```
+```text
 min-ready-sec = Application startup time + Health check stabilization
 
 Example:

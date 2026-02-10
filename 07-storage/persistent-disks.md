@@ -9,7 +9,7 @@
 Persistent Disks - block storage для Compute Engine VMs з різними типами для різних workloads:
 
 | Type | Technology | Max IOPS (Read/Write) | Max Throughput | Use Case |
-|------|------------|----------------------|----------------|----------|
+| --- | --- | --- | --- | --- |
 | **Standard PD** | HDD | 7,500 / 15,000 | 1,200 MB/s | Sequential, bulk |
 | **Balanced PD** | SSD | 80,000 / 30,000 | 1,200 MB/s | General purpose |
 | **SSD PD** | SSD | 100,000 / 60,000 | 1,200 MB/s | High performance |

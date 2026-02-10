@@ -479,8 +479,8 @@ gcloud compute instances create my-custom-vm \
 
 ## Порівняльна таблиця
 
-| Series | Type        | vCPU Range | Memory/vCPU | Use Case         | Price |
-|--------|-------------|------------|-------------|------------------|-------|
+| Series | Type | vCPU Range | Memory/vCPU | Use Case | Price |
+|--------|------|------------|-------------|----------|-------|
 | E2 | General | 0.25-32 | 0.5-8 GB | Cost-optimized | $ |
 | N2 | General | 2-128 | 0.5-8 GB | Balanced | $$ |
 | C2 | Compute | 4-60 | 4 GB | High-performance | $$$ |
@@ -638,7 +638,7 @@ graph TB
 
 **Без optimization (все On-Demand N2-standard-4):**
 
-```
+```text
 Total instances: 10 + 20 + 2 + 4 + 1 = 37 instances
 Cost: 37 × $0.15/hour × 730 hours = $4,051/month
 ```
