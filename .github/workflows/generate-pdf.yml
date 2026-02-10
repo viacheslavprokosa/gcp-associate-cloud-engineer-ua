@@ -72,6 +72,18 @@ jobs:
                   npm install -g @mermaid-js/mermaid-cli
                   npm install -g mermaid-filter
 
+            # Patch mmdc to use --no-sandbox
+            - name: Patch mmdc for CI
+              run: |
+                  MMDC_PATH=$(npm root -g)/mermaid-filter/node_modules/.bin/mmdc
+                  MMDC_REAL=$(npm root -g)/mermaid-filter/node_modules/.bin/mmdc.real
+                  mv "$MMDC_PATH" "$MMDC_REAL"
+                  cat > "$MMDC_PATH" << 'EOF'
+                  #!/bin/bash
+                  exec "$(dirname "$0")/mmdc.real" --puppeteerConfigFile "$(pwd)/.github/scripts/mermaid-config.json" "$@"
+                  EOF
+                  chmod +x "$MMDC_PATH"
+
             - name: Create pdf-book directory
               run: mkdir -p pdf-book
 
