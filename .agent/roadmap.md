@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 10:46
+**Last Updated:** 2026-02-10 10:47
 
 ---
 
@@ -70,6 +70,17 @@
   - E-commerce platform practical scenario
   - Cross-references to Modules 03, 04, 05, 10, 11
 
+- ✅ **cloud-dns.md** (11 → 839+ lines)
+  - Added DNS fundamentals and resolution process
+  - Comprehensive coverage of all 4 zone types (Public, Private, Forwarding, Peering)
+  - DNS record types (A, AAAA, CNAME, MX, TXT, NS, SOA, PTR, SRV, CAA)
+  - TTL strategy and best practices
+  - DNSSEC implementation and security
+  - Routing policies (WRR, Geolocation, Failover)
+  - Multi-region web application practical scenario
+  - Integration with Load Balancers
+  - Cross-references to Modules 03, 04, 09, 10, 11
+
 ---
 
 ## 🔄 Current Focus
@@ -92,7 +103,7 @@
 1. **Expand networking files:**
    - [x] vpc.md - Add VPC fundamentals, subnets, routing ✅
    - [x] load-balancing.md - LB types, decision tree ✅
-   - [ ] cloud-dns.md - DNS zones, records, DNSSEC
+   - [x] cloud-dns.md - DNS zones, records, DNSSEC ✅
    - [ ] vpn-interconnect.md - Cloud VPN, Interconnect options
 
 2. **Expand database files:**
@@ -138,10 +149,10 @@
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
-| 09 | 2/4 | ~1,712 | 🟡 In Progress |
+| 09 | 3/4 | ~2,540 | 🟡 In Progress |
 | 04-08, 10-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~30% of deep theory expansion completed
+**Total Progress:** ~35% of deep theory expansion completed
 
 ---
 
