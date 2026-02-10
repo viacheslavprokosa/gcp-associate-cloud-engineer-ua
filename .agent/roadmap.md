@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 15:32
+**Last Updated:** 2026-02-10 16:15
 
 ---
 
@@ -176,6 +176,42 @@
   - Secure production environment practical scenario
   - Cross-references to Modules 09, 10, 11
 
+### Module 04 - Kubernetes Engine ✅ **COMPLETED**
+
+- ✅ **gke-basics.md** (68 → 750+ lines)
+  - Added GKE fundamentals and architecture
+  - Standard vs Autopilot modes comparison
+  - Cluster types (Zonal, Multi-Zonal, Regional)
+  - Node pools and management
+  - VPC-native networking and private clusters
+  - Workload Identity setup and benefits
+  - Cluster autoscaling (Cluster Autoscaler, HPA, VPA)
+  - Security features (Binary Authorization, Shielded Nodes)
+  - Production GKE cluster practical scenario
+  - Cross-references to Modules 03, 07, 09, 10, 11
+
+- ✅ **clusters-and-nodes.md** (49 → 700+ lines)
+  - Added cluster types comparison (Zonal, Multi-Zonal, Regional)
+  - Node pools creation and management
+  - Node taints and tolerations
+  - Cluster autoscaling configuration
+  - Node auto-repair and auto-upgrade
+  - Release channels (Rapid, Regular, Stable)
+  - Node upgrades and surge upgrades
+  - Multi-tier application practical scenario
+  - Cross-references to Modules 03, 04, 09, 10
+
+- ✅ **workloads.md** (102 → 650+ lines)
+  - Added Kubernetes workloads fundamentals
+  - Pods lifecycle and management
+  - Deployments with rolling updates
+  - Services types (ClusterIP, NodePort, LoadBalancer, ExternalName)
+  - ConfigMaps and Secrets usage
+  - StatefulSets for stateful applications
+  - DaemonSets and Jobs/CronJobs
+  - Full application stack practical scenario
+  - Cross-references to Modules 04, 07, 09
+
 ---
 
 ## 🔄 Current Focus
@@ -220,9 +256,10 @@
    - [ ] disks-and-images.md - Add snapshot strategies
    - [ ] instance-groups.md - Add autoscaling theory
 
-2. **Expand Kubernetes files:**
-   - [ ] gke-basics.md - Add cluster architecture
-   - [ ] workloads.md - Add deployment strategies
+2. **Expand Kubernetes files:** ✅ **COMPLETED**
+   - [x] gke-basics.md - Add cluster architecture ✅
+   - [x] clusters-and-nodes.md - Add node management ✅
+   - [x] workloads.md - Add deployment strategies ✅
 
 3. **Expand remaining modules:**
    - [ ] App Engine files
@@ -247,12 +284,13 @@
 | 01 | 2/3 | ~500 | 🟡 In Progress |
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
+| 04 | 3/3 | ~2,100 | ✅ **COMPLETED** |
 | 08 | 4/4 | ~3,070 | ✅ **COMPLETED** |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
 | 10 | 4/4 | ~2,660 | ✅ **COMPLETED** |
-| 04-07, 11-13 | 0 | 0 | ⚪ Not Started |
+| 05-07, 11-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~56% of deep theory expansion completed
+**Total Progress:** ~60% of deep theory expansion completed
 
 ---
 
