@@ -1,6 +1,6 @@
 # GCP Associate CE Documentation - Roadmap
 
-**Last Updated:** 2026-02-10 16:15
+**Last Updated:** 2026-02-10 16:35
 
 ---
 
@@ -212,6 +212,29 @@
   - Full application stack practical scenario
   - Cross-references to Modules 04, 07, 09
 
+### Module 05 - App Engine ✅ **COMPLETED**
+
+- ✅ **standard-vs-flexible.md** (25 → 650+ lines)
+  - Added App Engine fundamentals and PaaS overview
+  - Standard Environment (sandbox, fast startup, free tier)
+  - Flexible Environment (Docker, SSH access, custom dependencies)
+  - Detailed comparison tables (startup, scaling, runtime, pricing)
+  - Use cases and environment selection criteria
+  - Migration considerations
+  - Practical scenarios for environment selection
+  - Cross-references to Modules 03, 04, 06, 09
+
+- ✅ **deployment.md** (31 → 600+ lines)
+  - Added app.yaml configuration (Standard and Flexible)
+  - Instance classes and scaling types
+  - Deployment commands and options
+  - Version management and naming
+  - Traffic splitting strategies (random, IP, cookie)
+  - Deployment strategies (Blue-Green, Canary, Rolling)
+  - Production deployment practical scenario
+  - Environment variables and Secret Manager integration
+  - Cross-references to Modules 04, 05, 12
+
 ---
 
 ## 🔄 Current Focus
@@ -261,10 +284,10 @@
    - [x] clusters-and-nodes.md - Add node management ✅
    - [x] workloads.md - Add deployment strategies ✅
 
-3. **Expand remaining modules:**
-   - [ ] App Engine files
+3. **Expand remaining modules:** ✅ **Module 05 COMPLETED**
+   - [x] App Engine files ✅
    - [ ] Cloud Functions files
-   - [ ] Monitoring files
+   - [ ] Storage files
    - [ ] Deployment files
 
 ### Long-term
@@ -285,12 +308,13 @@
 | 02 | 1/4 | ~140 | 🟡 In Progress |
 | 03 | 1/4 | ~370 | 🟡 In Progress |
 | 04 | 3/3 | ~2,100 | ✅ **COMPLETED** |
+| 05 | 2/2 | ~1,250 | ✅ **COMPLETED** |
 | 08 | 4/4 | ~3,070 | ✅ **COMPLETED** |
 | 09 | 4/4 | ~3,280 | ✅ **COMPLETED** |
 | 10 | 4/4 | ~2,660 | ✅ **COMPLETED** |
-| 05-07, 11-13 | 0 | 0 | ⚪ Not Started |
+| 06-07, 11-13 | 0 | 0 | ⚪ Not Started |
 
-**Total Progress:** ~60% of deep theory expansion completed
+**Total Progress:** ~63% of deep theory expansion completed
 
 ---
 
